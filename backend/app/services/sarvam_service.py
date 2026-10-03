@@ -513,67 +513,79 @@ class SarvamService:
             clean_vars.setdefault("location", "Mysuru, Karnataka")
             clean_vars.setdefault("symptoms", "Severe distress")
 
-        app_config_data: Dict[str, Any] = {
-            "app_id": app_id,
-            "app_version": resolved_version,
-            "agent_variables": clean_vars,
-            "connection_config": {
-                "connection_id": connection_id,
-                "agent_phone_number": agent_phone
+        # Generate candidate payloads to handle different published agent versions dynamically
+        payload_variations = []
+        for ver in [resolved_version, None, 1, 2, 3, 4]:
+            if ver in [p.get("app_version") for p in payload_variations]:
+                continue
+            
+            p_config = {
+                "app_id": app_id,
+                "agent_variables": clean_vars,
+                "connection_config": {
+                    "connection_id": connection_id,
+                    "agent_phone_number": agent_phone
+                }
             }
-        }
+            if ver is not None:
+                p_config["app_version"] = ver
 
-        payload = {
-            "app_id": app_id,
-            "app_version": resolved_version,
-            "user_phone_number": clean_target,
-            "agent_variables": clean_vars,
-            "app_config": app_config_data,
-            "user_config": {
+            p_load = {
+                "app_id": app_id,
                 "user_phone_number": clean_target,
                 "agent_variables": clean_vars,
-                "user_variables": clean_vars
+                "app_config": p_config,
+                "user_config": {
+                    "user_phone_number": clean_target,
+                    "agent_variables": clean_vars,
+                    "user_variables": clean_vars
+                }
             }
-        }
+            if ver is not None:
+                p_load["app_version"] = ver
+
+            payload_variations.append(p_load)
 
         endpoints_to_try = [
             f"https://apps.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
-            f"https://api.sarvam.ai/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds"
+            f"https://api.sarvam.ai/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
+            f"https://api.sarvam.ai/v1/voice-agents/outbound"
         ]
 
-        logger.info(f"Triggering Sarvam outbound voice call to {clean_target} using agent {app_id} v{resolved_version} in org {org_id} workspace {workspace_id}")
+        logger.info(f"Triggering Sarvam outbound voice call to {clean_target} using agent {app_id} in org {org_id} workspace {workspace_id}")
 
         try:
             async with httpx.AsyncClient(timeout=30.0) as client:
                 last_res = None
                 for endpoint_url in endpoints_to_try:
-                    for headers in candidate_headers:
-                        try:
-                            res = await client.post(endpoint_url, headers=headers, json=payload)
-                            last_res = res
-                            if res.status_code in [200, 201, 202]:
-                                try:
-                                    data = res.json()
-                                    if isinstance(data, dict):
-                                        logger.info(f"Sarvam outbound call successfully initiated via {endpoint_url}: {data}")
-                                        return {
-                                            "success": True,
-                                            "call_id": data.get("id") or data.get("outbound_id") or data.get("interaction_id") or "initiated",
-                                            "status": "initiated",
-                                            "target_phone": clean_target,
-                                            "agent_id": app_id,
-                                            "details": data
-                                        }
-                                except Exception:
-                                    continue
-                            elif res.status_code == 401:
-                                continue  # Try next candidate header
-                            elif res.status_code == 404:
-                                break  # Try next endpoint URL
-                            else:
-                                break
-                        except Exception as req_err:
-                            logger.warning(f"Error requesting {endpoint_url}: {req_err}")
+                    for payload_item in payload_variations:
+                        for headers in candidate_headers:
+                            try:
+                                res = await client.post(endpoint_url, headers=headers, json=payload_item)
+                                last_res = res
+                                if res.status_code in [200, 201, 202]:
+                                    try:
+                                        data = res.json()
+                                        if isinstance(data, dict):
+                                            logger.info(f"Sarvam outbound call successfully initiated via {endpoint_url}: {data}")
+                                            return {
+                                                "success": True,
+                                                "call_id": data.get("id") or data.get("outbound_id") or data.get("interaction_id") or "initiated",
+                                                "status": "initiated",
+                                                "target_phone": clean_target,
+                                                "agent_id": app_id,
+                                                "details": data
+                                            }
+                                    except Exception:
+                                        continue
+                                elif res.status_code == 401:
+                                    continue  # Try next candidate header
+                                elif res.status_code in [404, 422]:
+                                    continue  # Try next payload variation or endpoint
+                                else:
+                                    break
+                            except Exception as req_err:
+                                logger.warning(f"Error requesting {endpoint_url}: {req_err}")
 
                 logger.error(f"Sarvam outbound call returned HTTP {last_res.status_code if last_res else 500}: {last_res.text if last_res else 'No response'}")
                 return {
