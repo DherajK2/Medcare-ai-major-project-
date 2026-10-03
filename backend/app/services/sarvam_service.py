@@ -572,11 +572,10 @@ class SarvamService:
             })
 
         endpoints_to_try = [
+            f"https://apps.sarvam.ai/api/app-runtime/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
             f"https://apps.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
-            f"https://apps.sarvam.ai/api/voice-agents/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
-            f"https://api.sarvam.ai/v1/voice-agents/outbound",
-            f"https://api.sarvam.ai/v1/outbounds",
-            f"https://apps.sarvam.ai/api/v1/outbounds"
+            f"https://agents.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
+            f"https://api.sarvam.ai/v1/voice-agents/outbound"
         ]
 
         logger.info(f"Triggering Sarvam outbound voice call to {clean_target} using agent {app_id} in org {org_id} workspace {workspace_id}")
@@ -614,12 +613,13 @@ class SarvamService:
                             except Exception as req_err:
                                 logger.warning(f"Error requesting {endpoint_url}: {req_err}")
 
-                logger.error(f"Sarvam outbound call returned HTTP {last_res.status_code if last_res else 500}: {last_res.text if last_res else 'No response'}")
+                err_text = last_res.text if (last_res and not last_res.text.strip().startswith("<")) else f"Sarvam Gateway returned HTTP {last_res.status_code if last_res else 500}"
+                logger.error(f"Sarvam outbound call returned HTTP {last_res.status_code if last_res else 500}: {err_text}")
                 return {
                     "success": False,
                     "status": "failed",
                     "status_code": last_res.status_code if last_res else 500,
-                    "error": last_res.text if last_res else "No response",
+                    "error": err_text,
                     "target_phone": clean_target
                 }
         except Exception as e:
