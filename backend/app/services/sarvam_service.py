@@ -450,6 +450,8 @@ class SarvamService:
 
         headers = {
             "X-API-Key": api_key.strip() if api_key else "",
+            "api-subscription-key": api_key.strip() if api_key else "",
+            "Authorization": f"Bearer {api_key.strip()}" if api_key else "",
             "Content-Type": "application/json"
         }
 
