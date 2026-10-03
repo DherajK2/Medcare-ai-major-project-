@@ -37,8 +37,8 @@ class Settings(BaseSettings):
     STT_PROVIDER: str = "sarvam"
     SARVAM_API_KEY: Optional[str] = None
     SARVAM_ORG_ID: Optional[str] = "01a05e64-a78a-74b4-ace2-6a4749e4876b"
-    SARVAM_WORKSPACE_ID: Optional[str] = "01a05e65-27f1-71fa-948d-692fc3f86e3f"
-    SARVAM_CONNECTION_ID: Optional[str] = "01a05e68-e4b2-70b7-b08e-5b1b446a6f6f"
+    SARVAM_WORKSPACE_ID: Optional[str] = "01a05e64-a79d-78b0-8718-01f0caed2249"
+    SARVAM_CONNECTION_ID: Optional[str] = "44dbf942-36-b6a718e2-845a"
     SARVAM_AGENT_PHONE_NUMBER: Optional[str] = "+918071582685"
     SARVAM_APP_ID: Optional[str] = "Emergency-B-7af1e36f-7382"
     SARVAM_EMERGENCY_APP_ID: Optional[str] = "MedCare-Eme-abd37307-3a0f"
