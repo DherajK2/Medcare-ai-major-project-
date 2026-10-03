@@ -1,0 +1,46 @@
+# Environment variables
+.env
+.env.*
+*.env
+*.env.local
+backend/.env
+frontend/.env
+anatomy/.env
+
+# Dependencies
+node_modules/
+.venv/
+venv/
+*.egg-info/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Build outputs
+dist/
+build/
+.next/
+*.tsbuildinfo
+
+# SQLite databases & temp data
+*.db
+*.sqlite
+*.sqlite3
+sarvam_calls.db
+backend/sarvam_calls.db
+
+# OS & Logs
+.DS_Store
+*.log
+*.pid
+.system_generated/
+
+# Supabase
+supabase/.temp/
+

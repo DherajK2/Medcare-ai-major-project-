@@ -1,0 +1,2204 @@
+{
+  "doctors": [
+    {
+      "id": "MYS-0001",
+      "name": "Dr Arun Srinivas",
+      "specialty": "Cardiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "37+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "cardiology"
+    },
+    {
+      "id": "MYS-0002",
+      "name": "Dr Ramya Y",
+      "specialty": "Surgical Oncology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "5+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "oncology"
+    },
+    {
+      "id": "MYS-0003",
+      "name": "Dr Srinivas Nalloor",
+      "specialty": "Nephrology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "27+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "nephrology"
+    },
+    {
+      "id": "MYS-0004",
+      "name": "Dr Rajkumar P Wadhwa",
+      "specialty": "Gastroenterology & Hepatology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "30+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "gastroenterology"
+    },
+    {
+      "id": "MYS-0005",
+      "name": "Dr Chaitra Katakol",
+      "specialty": "Radiation Oncology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "15+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "oncology"
+    },
+    {
+      "id": "MYS-0006",
+      "name": "Dr Keshava Murthy Ganapathy Bhat",
+      "specialty": "Cardiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "33+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "cardiology"
+    },
+    {
+      "id": "MYS-0007",
+      "name": "Dr Naveen Jayaram",
+      "specialty": "Oncology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "22+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "oncology"
+    },
+    {
+      "id": "MYS-0008",
+      "name": "Dr Praveen Chandrashekhar",
+      "specialty": "Nephrology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "11+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "nephrology"
+    },
+    {
+      "id": "MYS-0009",
+      "name": "Dr Nairuthya S",
+      "specialty": "Gastroenterology & Hepatology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "17+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "gastroenterology"
+    },
+    {
+      "id": "MYS-0010",
+      "name": "Dr K S Sowbhagyalakshmi",
+      "specialty": "Obstetrics & Gynecology & Reproductive Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "47+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0011",
+      "name": "Dr Nitin Srichand",
+      "specialty": "Orthopedics",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "22+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "orthopedics"
+    },
+    {
+      "id": "MYS-0012",
+      "name": "Dr Sagar Narayan",
+      "specialty": "Liver Transplant & HPB Surgery",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "8+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "gastroenterology"
+    },
+    {
+      "id": "MYS-0013",
+      "name": "Dr Kruthi M K",
+      "specialty": "Infectious Diseases",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "6+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0014",
+      "name": "Dr Akshay Anchan",
+      "specialty": "Plastic & Reconstructive Surgery",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "6+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general_surgery"
+    },
+    {
+      "id": "MYS-0015",
+      "name": "Dr Somanath Vasudev",
+      "specialty": "Neurosciences",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "20+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "neurology"
+    },
+    {
+      "id": "MYS-0016",
+      "name": "Dr Shankar Prasad",
+      "specialty": "Pediatric Intensivist",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "9+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "pediatrics"
+    },
+    {
+      "id": "MYS-0017",
+      "name": "Dr Guruprasad H P",
+      "specialty": "Cardiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "32+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "cardiology"
+    },
+    {
+      "id": "MYS-0018",
+      "name": "Dr Aathira Ravindranath",
+      "specialty": "Gastroenterology & Hepatology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "11+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "gastroenterology"
+    },
+    {
+      "id": "MYS-0019",
+      "name": "Dr Vanitha L V",
+      "specialty": "Obstetrics & Gynecology & Reproductive Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "28+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0020",
+      "name": "Dr Jayavardhan Y B",
+      "specialty": "Orthopedics",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "11+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "orthopedics"
+    },
+    {
+      "id": "MYS-0021",
+      "name": "Dr Aumir Moin",
+      "specialty": "Neurosciences",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "22+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "neurology"
+    },
+    {
+      "id": "MYS-0022",
+      "name": "Dr Sripathi Adhikari",
+      "specialty": "Pediatrics",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "33+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "pediatrics"
+    },
+    {
+      "id": "MYS-0023",
+      "name": "Dr Chethan Bhardwaj",
+      "specialty": "Cardiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "9+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "cardiology"
+    },
+    {
+      "id": "MYS-0024",
+      "name": "Dr Rashmi M D",
+      "specialty": "Obstetrics & Gynecology & Reproductive Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "22+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0025",
+      "name": "Dr Shreyas Alva",
+      "specialty": "Orthopedics",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "15+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "orthopedics"
+    },
+    {
+      "id": "MYS-0026",
+      "name": "Dr Bopaiah K S",
+      "specialty": "Neurosciences",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "22+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "neurology"
+    },
+    {
+      "id": "MYS-0027",
+      "name": "Dr Jyotsna AS",
+      "specialty": "Pediatric Neurology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "12+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "neurology"
+    },
+    {
+      "id": "MYS-0028",
+      "name": "Dr Lokesh B L",
+      "specialty": "Neurosciences",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "20+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "neurology"
+    },
+    {
+      "id": "MYS-0029",
+      "name": "Dr Kiran Mugadur",
+      "specialty": "Interventional Cardiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "8+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "cardiology"
+    },
+    {
+      "id": "MYS-0030",
+      "name": "Dr Javeed Nayeem",
+      "specialty": "General Physician / General Medicine / Internal Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "39+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0031",
+      "name": "Dr Satish H V",
+      "specialty": "Cosmetology & Plastic Surgery",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "31+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "dermatology"
+    },
+    {
+      "id": "MYS-0032",
+      "name": "Dr Harindra M N",
+      "specialty": "ENT",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "30+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "ent"
+    },
+    {
+      "id": "MYS-0033",
+      "name": "Dr Raghavendra M",
+      "specialty": "Urology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "29+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "urology"
+    },
+    {
+      "id": "MYS-0034",
+      "name": "Dr K A Prahlad",
+      "specialty": "Internal Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "29+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0035",
+      "name": "Dr Ravi Puranik",
+      "specialty": "Internal Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "27+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0036",
+      "name": "Dr Harish M Nayak",
+      "specialty": "Intensive Care",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "26+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0037",
+      "name": "Dr Girish N Kulkarni",
+      "specialty": "ENT",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "25+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "ent"
+    },
+    {
+      "id": "MYS-0038",
+      "name": "Dr Ranjitha V N",
+      "specialty": "Pathology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "25+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0039",
+      "name": "Dr Srinath S",
+      "specialty": "General Surgery",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "25+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general_surgery"
+    },
+    {
+      "id": "MYS-0040",
+      "name": "Dr RamaKrishna M N",
+      "specialty": "Critical Care",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "25+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0041",
+      "name": "Dr Anish Behl",
+      "specialty": "Endocrinology & Diabetes Care",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "24+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "diabetology"
+    },
+    {
+      "id": "MYS-0042",
+      "name": "Dr Narahari M G",
+      "specialty": "Internal Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "22+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0043",
+      "name": "Dr Venkatesh Murthy M R",
+      "specialty": "Critical Care & Emergency Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "22+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0044",
+      "name": "Dr Girish G",
+      "specialty": "Pediatrics",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "21+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "pediatrics"
+    },
+    {
+      "id": "MYS-0045",
+      "name": "Dr S S Lakshmi",
+      "specialty": "Ophthalmology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "21+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "ophthalmology"
+    },
+    {
+      "id": "MYS-0046",
+      "name": "Dr Avinash C.B",
+      "specialty": "Oncology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "21+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "oncology"
+    },
+    {
+      "id": "MYS-0047",
+      "name": "Dr Ashok Kumar Rajamanickam",
+      "specialty": "Radiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "20+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0048",
+      "name": "Dr Seethalakshmy Somanath",
+      "specialty": "Anaesthesiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "20+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0049",
+      "name": "Dr Prakash Rao A S",
+      "specialty": "Anaesthesiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "20+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0050",
+      "name": "Dr Madhu K",
+      "specialty": "Pulmonology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "19+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "pulmonology"
+    },
+    {
+      "id": "MYS-0051",
+      "name": "Dr Prakash H.K",
+      "specialty": "Anesthesiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "19+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0052",
+      "name": "Dr Vijay H V",
+      "specialty": "Radiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "19+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0053",
+      "name": "Dr Girish M",
+      "specialty": "Anaesthesiologist / Intensive Care / Transplants",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "18+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0054",
+      "name": "Dr Sanjeeva Rao Girimaji S",
+      "specialty": "Internal Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "16+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0055",
+      "name": "Dr Arti Behl",
+      "specialty": "Psychiatry & Psychology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "16+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "psychiatry"
+    },
+    {
+      "id": "MYS-0056",
+      "name": "Dr Dayananda T R",
+      "specialty": "Dermatology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "16+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "dermatology"
+    },
+    {
+      "id": "MYS-0057",
+      "name": "Dr Champakamala C",
+      "specialty": "Dietician and Nutrition",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "16+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0058",
+      "name": "Dr Jayanth B N",
+      "specialty": "General Surgery",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "15+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general_surgery"
+    },
+    {
+      "id": "MYS-0059",
+      "name": "Dr Thejaswini A",
+      "specialty": "General Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "12+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0060",
+      "name": "Dr Kavitha Prakash Palled",
+      "specialty": "ENT - Head and Neck Skull Base Surgery",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "12+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "ent"
+    },
+    {
+      "id": "MYS-0061",
+      "name": "Dr Sandeep B S",
+      "specialty": "Radiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "12+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0062",
+      "name": "Dr Avinash R",
+      "specialty": "Pulmonology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "11+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "pulmonology"
+    },
+    {
+      "id": "MYS-0063",
+      "name": "Dr Ganapriya G P",
+      "specialty": "Interventional Pulmonology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "10+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "pulmonology"
+    },
+    {
+      "id": "MYS-0064",
+      "name": "Dr Impana G N",
+      "specialty": "General Medicine / Family Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "9+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0065",
+      "name": "Dr Shivakumar Basavaradder",
+      "specialty": "Critical Care & Emergency Medicine",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "9+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0066",
+      "name": "Dr Balachandra S R",
+      "specialty": "Intensive Care",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "9+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0067",
+      "name": "Dr Harshitha N",
+      "specialty": "ENT",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "8+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "ent"
+    },
+    {
+      "id": "MYS-0068",
+      "name": "Dr Kiran Kumar Shetty",
+      "specialty": "Urology / Andrology / Kidney Transplant",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "8+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "nephrology"
+    },
+    {
+      "id": "MYS-0069",
+      "name": "Dr Yousuf Mohammed Rafi",
+      "specialty": "Cardiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "8+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "cardiology"
+    },
+    {
+      "id": "MYS-0070",
+      "name": "Dr Siddarth Kumar Chawath",
+      "specialty": "Interventional Cardiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "7+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "cardiology"
+    },
+    {
+      "id": "MYS-0071",
+      "name": "Dr Anjali Arun",
+      "specialty": "Pathology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "5+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0072",
+      "name": "Dr Seema Umesh",
+      "specialty": "Anaesthesiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "5+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0073",
+      "name": "Dr Spoorthy Raj D R",
+      "specialty": "Rheumatology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "4+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "rheumatology"
+    },
+    {
+      "id": "MYS-0074",
+      "name": "Dr Kavitha B",
+      "specialty": "Obstetrics & Gynecology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "4+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0075",
+      "name": "Dr H V Deepthi",
+      "specialty": "Anaesthesiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "4+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "emergency_critical_care"
+    },
+    {
+      "id": "MYS-0076",
+      "name": "Dr Satish Kumar Reddy Gudempati",
+      "specialty": "Microbiology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "4+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0077",
+      "name": "Dr Vinay Hegde S",
+      "specialty": "Neurosciences",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "4+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "neurology"
+    },
+    {
+      "id": "MYS-0078",
+      "name": "Dr Sindhu B",
+      "specialty": "Orthopedics / Sports Medicine / Arthroscopic Surgery / Trauma Surgery",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "4+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "orthopedics"
+    },
+    {
+      "id": "MYS-0079",
+      "name": "Mr Manooj P",
+      "specialty": "Psychology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "4+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "psychiatry"
+    },
+    {
+      "id": "MYS-0080",
+      "name": "Dr Prarthana T",
+      "specialty": "Dermatology",
+      "hospital": "Apollo BGS Hospitals, Mysore",
+      "city": "Mysuru",
+      "experience": "2+ years",
+      "phone": "0821-2566666 / 0821-2568888",
+      "domain": "dermatology"
+    },
+    {
+      "id": "MYS-0081",
+      "name": "Dr Maqsood Ahmed Shariff",
+      "specialty": "General Physician",
+      "hospital": "Manipal Hospitals Mysore",
+      "city": "Mysuru",
+      "experience": "36 years",
+      "phone": "0821-2491111 / +91 1800 102 4647",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0082",
+      "name": "Dr Harsha",
+      "specialty": "General Physician",
+      "hospital": "Manipal Hospitals Mysore",
+      "city": "Mysuru",
+      "experience": "2 years",
+      "phone": "0821-2491111 / +91 1800 102 4647",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0083",
+      "name": "Dr Maqsood Ahmed Abdul Rahman",
+      "specialty": "Neurosurgery",
+      "hospital": "Manipal Hospitals Mysore",
+      "city": "Mysuru",
+      "experience": "26 years",
+      "phone": "0821-2491111 / +91 1800 102 4647",
+      "domain": "neurology"
+    },
+    {
+      "id": "MYS-0084",
+      "name": "Dr Thimmaiah K A",
+      "specialty": "Urology",
+      "hospital": "Manipal Hospitals Mysore",
+      "city": "Mysuru",
+      "experience": "11 years",
+      "phone": "0821-2491111 / +91 1800 102 4647",
+      "domain": "urology"
+    },
+    {
+      "id": "MYS-0085",
+      "name": "Dr Shaheen Akhtar",
+      "specialty": "Gynecology & Obstetrics",
+      "hospital": "Manipal Hospitals Mysore",
+      "city": "Mysuru",
+      "experience": "22 years",
+      "phone": "0821-2491111 / +91 1800 102 4647",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0086",
+      "name": "Dr Jayakarthik Y",
+      "specialty": "Oncology",
+      "hospital": "Manipal Hospitals Mysore",
+      "city": "Mysuru",
+      "experience": "17 years",
+      "phone": "0821-2491111 / +91 1800 102 4647",
+      "domain": "oncology"
+    },
+    {
+      "id": "MYS-0087",
+      "name": "Dr Nivedita Vishwanath Adapa",
+      "specialty": "Gynecology & Obstetrics",
+      "hospital": "Manipal Hospitals Mysore",
+      "city": "Mysuru",
+      "experience": "32 years",
+      "phone": "0821-2491111 / +91 1800 102 4647",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0088",
+      "name": "Dr Amulya K G",
+      "specialty": "Gynecology & Obstetrics",
+      "hospital": "Manipal Hospitals Mysore",
+      "city": "Mysuru",
+      "experience": "13 years",
+      "phone": "0821-2491111 / +91 1800 102 4647",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0089",
+      "name": "Dr Sreeharsha M V",
+      "specialty": "General Surgery",
+      "hospital": "Manipal Hospitals Mysore",
+      "city": "Mysuru",
+      "experience": "24 years",
+      "phone": "0821-2491111 / +91 1800 102 4647",
+      "domain": "general_surgery"
+    },
+    {
+      "id": "MYS-0090",
+      "name": "Dr Vipin Kaverappa P T",
+      "specialty": "Nephrology",
+      "hospital": "Manipal Hospitals Mysore",
+      "city": "Mysuru",
+      "experience": "17 years",
+      "phone": "0821-2491111 / +91 1800 102 4647",
+      "domain": "nephrology"
+    },
+    {
+      "id": "MYS-0091",
+      "name": "Dr Shwetha Nayak",
+      "specialty": "Gynecology & Obstetrics",
+      "hospital": "Motherhood Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "21 years",
+      "phone": "0821-2566666",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0092",
+      "name": "Dr Chethan B",
+      "specialty": "Pediatrics",
+      "hospital": "Motherhood Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "17 years",
+      "phone": "0821-2566666",
+      "domain": "pediatrics"
+    },
+    {
+      "id": "MYS-0093",
+      "name": "Dr Madhura Pathak",
+      "specialty": "Gynecology & Obstetrics",
+      "hospital": "Motherhood Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "26 years",
+      "phone": "0821-2566666",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0094",
+      "name": "Dr Suhaim Afsar",
+      "specialty": "Pediatrics",
+      "hospital": "Motherhood Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "14 years",
+      "phone": "0821-2566666",
+      "domain": "pediatrics"
+    },
+    {
+      "id": "MYS-0095",
+      "name": "Dr Soumya R Patil",
+      "specialty": "Gynecology & Obstetrics",
+      "hospital": "Motherhood Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "11 years",
+      "phone": "0821-2566666",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0096",
+      "name": "Dr A C Apoorva",
+      "specialty": "Pediatrics",
+      "hospital": "Motherhood Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "7 years",
+      "phone": "0821-2566666",
+      "domain": "pediatrics"
+    },
+    {
+      "id": "MYS-0097",
+      "name": "Dr M S Sushila Bhuriya",
+      "specialty": "Gynecology & Obstetrics",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "9 years",
+      "phone": "0821-2566666",
+      "domain": "gynecology"
+    },
+    {
+      "id": "MYS-0098",
+      "name": "Dr Sujana Theja J S",
+      "specialty": "Orthopedics / Joint Replacement / Spine",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "16 years",
+      "phone": "0821-2566666",
+      "domain": "orthopedics"
+    },
+    {
+      "id": "MYS-0099",
+      "name": "Dr Ganesh G Gowda",
+      "specialty": "General Surgery / Vascular Surgery",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "Not listed",
+      "phone": "0821-2566666",
+      "domain": "general_surgery"
+    },
+    {
+      "id": "MYS-0100",
+      "name": "Dr Subramanian R",
+      "specialty": "Rheumatology",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "17 years",
+      "phone": "0821-2566666",
+      "domain": "rheumatology"
+    },
+    {
+      "id": "MYS-0101",
+      "name": "Dr Nirmal Mathew Alex",
+      "specialty": "General Medicine",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "10 years",
+      "phone": "0821-2566666",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0102",
+      "name": "Dr Shruthi R",
+      "specialty": "General Medicine",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "6 years",
+      "phone": "0821-2566666",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0103",
+      "name": "Dr Vishwas K",
+      "specialty": "General Medicine",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "12 years",
+      "phone": "0821-2566666",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0104",
+      "name": "Dr Laya",
+      "specialty": "General Medicine",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "2 years",
+      "phone": "0821-2566666",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0105",
+      "name": "Dr Aima Pious K J",
+      "specialty": "General Medicine",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "2 years",
+      "phone": "0821-2566666",
+      "domain": "general"
+    },
+    {
+      "id": "MYS-0106",
+      "name": "Dr H P Nandeesh",
+      "specialty": "Gastroenterology",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "33 years",
+      "phone": "0821-2566666",
+      "domain": "gastroenterology"
+    },
+    {
+      "id": "MYS-0107",
+      "name": "Dr Amruthraj G Gowda",
+      "specialty": "Urology",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "34 years",
+      "phone": "0821-2566666",
+      "domain": "urology"
+    },
+    {
+      "id": "MYS-0108",
+      "name": "Dr Shasthara",
+      "specialty": "Neurology",
+      "hospital": "JSS Hospital, Mysore",
+      "city": "Mysuru",
+      "experience": "13 years",
+      "phone": "0821-2566666",
+      "domain": "neurology"
+    }
+  ],
+  "domains": {
+    "cardiology": [
+      {
+        "id": "MYS-0001",
+        "name": "Dr Arun Srinivas",
+        "specialty": "Cardiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "37+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "cardiology"
+      },
+      {
+        "id": "MYS-0006",
+        "name": "Dr Keshava Murthy Ganapathy Bhat",
+        "specialty": "Cardiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "33+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "cardiology"
+      },
+      {
+        "id": "MYS-0017",
+        "name": "Dr Guruprasad H P",
+        "specialty": "Cardiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "32+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "cardiology"
+      },
+      {
+        "id": "MYS-0023",
+        "name": "Dr Chethan Bhardwaj",
+        "specialty": "Cardiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "9+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "cardiology"
+      },
+      {
+        "id": "MYS-0029",
+        "name": "Dr Kiran Mugadur",
+        "specialty": "Interventional Cardiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "8+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "cardiology"
+      },
+      {
+        "id": "MYS-0069",
+        "name": "Dr Yousuf Mohammed Rafi",
+        "specialty": "Cardiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "8+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "cardiology"
+      },
+      {
+        "id": "MYS-0070",
+        "name": "Dr Siddarth Kumar Chawath",
+        "specialty": "Interventional Cardiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "7+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "cardiology"
+      }
+    ],
+    "oncology": [
+      {
+        "id": "MYS-0002",
+        "name": "Dr Ramya Y",
+        "specialty": "Surgical Oncology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "5+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "oncology"
+      },
+      {
+        "id": "MYS-0005",
+        "name": "Dr Chaitra Katakol",
+        "specialty": "Radiation Oncology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "15+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "oncology"
+      },
+      {
+        "id": "MYS-0007",
+        "name": "Dr Naveen Jayaram",
+        "specialty": "Oncology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "22+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "oncology"
+      },
+      {
+        "id": "MYS-0046",
+        "name": "Dr Avinash C.B",
+        "specialty": "Oncology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "21+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "oncology"
+      },
+      {
+        "id": "MYS-0086",
+        "name": "Dr Jayakarthik Y",
+        "specialty": "Oncology",
+        "hospital": "Manipal Hospitals Mysore",
+        "city": "Mysuru",
+        "experience": "17 years",
+        "phone": "0821-2491111 / +91 1800 102 4647",
+        "domain": "oncology"
+      }
+    ],
+    "nephrology": [
+      {
+        "id": "MYS-0003",
+        "name": "Dr Srinivas Nalloor",
+        "specialty": "Nephrology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "27+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "nephrology"
+      },
+      {
+        "id": "MYS-0008",
+        "name": "Dr Praveen Chandrashekhar",
+        "specialty": "Nephrology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "11+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "nephrology"
+      },
+      {
+        "id": "MYS-0068",
+        "name": "Dr Kiran Kumar Shetty",
+        "specialty": "Urology / Andrology / Kidney Transplant",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "8+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "nephrology"
+      },
+      {
+        "id": "MYS-0090",
+        "name": "Dr Vipin Kaverappa P T",
+        "specialty": "Nephrology",
+        "hospital": "Manipal Hospitals Mysore",
+        "city": "Mysuru",
+        "experience": "17 years",
+        "phone": "0821-2491111 / +91 1800 102 4647",
+        "domain": "nephrology"
+      }
+    ],
+    "gastroenterology": [
+      {
+        "id": "MYS-0004",
+        "name": "Dr Rajkumar P Wadhwa",
+        "specialty": "Gastroenterology & Hepatology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "30+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "gastroenterology"
+      },
+      {
+        "id": "MYS-0009",
+        "name": "Dr Nairuthya S",
+        "specialty": "Gastroenterology & Hepatology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "17+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "gastroenterology"
+      },
+      {
+        "id": "MYS-0012",
+        "name": "Dr Sagar Narayan",
+        "specialty": "Liver Transplant & HPB Surgery",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "8+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "gastroenterology"
+      },
+      {
+        "id": "MYS-0018",
+        "name": "Dr Aathira Ravindranath",
+        "specialty": "Gastroenterology & Hepatology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "11+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "gastroenterology"
+      },
+      {
+        "id": "MYS-0106",
+        "name": "Dr H P Nandeesh",
+        "specialty": "Gastroenterology",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "33 years",
+        "phone": "0821-2566666",
+        "domain": "gastroenterology"
+      }
+    ],
+    "gynecology": [
+      {
+        "id": "MYS-0010",
+        "name": "Dr K S Sowbhagyalakshmi",
+        "specialty": "Obstetrics & Gynecology & Reproductive Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "47+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "gynecology"
+      },
+      {
+        "id": "MYS-0019",
+        "name": "Dr Vanitha L V",
+        "specialty": "Obstetrics & Gynecology & Reproductive Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "28+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "gynecology"
+      },
+      {
+        "id": "MYS-0024",
+        "name": "Dr Rashmi M D",
+        "specialty": "Obstetrics & Gynecology & Reproductive Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "22+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "gynecology"
+      },
+      {
+        "id": "MYS-0074",
+        "name": "Dr Kavitha B",
+        "specialty": "Obstetrics & Gynecology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "4+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "gynecology"
+      },
+      {
+        "id": "MYS-0085",
+        "name": "Dr Shaheen Akhtar",
+        "specialty": "Gynecology & Obstetrics",
+        "hospital": "Manipal Hospitals Mysore",
+        "city": "Mysuru",
+        "experience": "22 years",
+        "phone": "0821-2491111 / +91 1800 102 4647",
+        "domain": "gynecology"
+      },
+      {
+        "id": "MYS-0087",
+        "name": "Dr Nivedita Vishwanath Adapa",
+        "specialty": "Gynecology & Obstetrics",
+        "hospital": "Manipal Hospitals Mysore",
+        "city": "Mysuru",
+        "experience": "32 years",
+        "phone": "0821-2491111 / +91 1800 102 4647",
+        "domain": "gynecology"
+      },
+      {
+        "id": "MYS-0088",
+        "name": "Dr Amulya K G",
+        "specialty": "Gynecology & Obstetrics",
+        "hospital": "Manipal Hospitals Mysore",
+        "city": "Mysuru",
+        "experience": "13 years",
+        "phone": "0821-2491111 / +91 1800 102 4647",
+        "domain": "gynecology"
+      },
+      {
+        "id": "MYS-0091",
+        "name": "Dr Shwetha Nayak",
+        "specialty": "Gynecology & Obstetrics",
+        "hospital": "Motherhood Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "21 years",
+        "phone": "0821-2566666",
+        "domain": "gynecology"
+      },
+      {
+        "id": "MYS-0093",
+        "name": "Dr Madhura Pathak",
+        "specialty": "Gynecology & Obstetrics",
+        "hospital": "Motherhood Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "26 years",
+        "phone": "0821-2566666",
+        "domain": "gynecology"
+      },
+      {
+        "id": "MYS-0095",
+        "name": "Dr Soumya R Patil",
+        "specialty": "Gynecology & Obstetrics",
+        "hospital": "Motherhood Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "11 years",
+        "phone": "0821-2566666",
+        "domain": "gynecology"
+      },
+      {
+        "id": "MYS-0097",
+        "name": "Dr M S Sushila Bhuriya",
+        "specialty": "Gynecology & Obstetrics",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "9 years",
+        "phone": "0821-2566666",
+        "domain": "gynecology"
+      }
+    ],
+    "orthopedics": [
+      {
+        "id": "MYS-0011",
+        "name": "Dr Nitin Srichand",
+        "specialty": "Orthopedics",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "22+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "orthopedics"
+      },
+      {
+        "id": "MYS-0020",
+        "name": "Dr Jayavardhan Y B",
+        "specialty": "Orthopedics",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "11+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "orthopedics"
+      },
+      {
+        "id": "MYS-0025",
+        "name": "Dr Shreyas Alva",
+        "specialty": "Orthopedics",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "15+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "orthopedics"
+      },
+      {
+        "id": "MYS-0078",
+        "name": "Dr Sindhu B",
+        "specialty": "Orthopedics / Sports Medicine / Arthroscopic Surgery / Trauma Surgery",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "4+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "orthopedics"
+      },
+      {
+        "id": "MYS-0098",
+        "name": "Dr Sujana Theja J S",
+        "specialty": "Orthopedics / Joint Replacement / Spine",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "16 years",
+        "phone": "0821-2566666",
+        "domain": "orthopedics"
+      }
+    ],
+    "general": [
+      {
+        "id": "MYS-0013",
+        "name": "Dr Kruthi M K",
+        "specialty": "Infectious Diseases",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "6+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0030",
+        "name": "Dr Javeed Nayeem",
+        "specialty": "General Physician / General Medicine / Internal Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "39+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0034",
+        "name": "Dr K A Prahlad",
+        "specialty": "Internal Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "29+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0035",
+        "name": "Dr Ravi Puranik",
+        "specialty": "Internal Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "27+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0038",
+        "name": "Dr Ranjitha V N",
+        "specialty": "Pathology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "25+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0042",
+        "name": "Dr Narahari M G",
+        "specialty": "Internal Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "22+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0047",
+        "name": "Dr Ashok Kumar Rajamanickam",
+        "specialty": "Radiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "20+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0052",
+        "name": "Dr Vijay H V",
+        "specialty": "Radiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "19+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0054",
+        "name": "Dr Sanjeeva Rao Girimaji S",
+        "specialty": "Internal Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "16+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0057",
+        "name": "Dr Champakamala C",
+        "specialty": "Dietician and Nutrition",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "16+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0059",
+        "name": "Dr Thejaswini A",
+        "specialty": "General Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "12+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0061",
+        "name": "Dr Sandeep B S",
+        "specialty": "Radiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "12+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0064",
+        "name": "Dr Impana G N",
+        "specialty": "General Medicine / Family Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "9+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0071",
+        "name": "Dr Anjali Arun",
+        "specialty": "Pathology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "5+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0076",
+        "name": "Dr Satish Kumar Reddy Gudempati",
+        "specialty": "Microbiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "4+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0081",
+        "name": "Dr Maqsood Ahmed Shariff",
+        "specialty": "General Physician",
+        "hospital": "Manipal Hospitals Mysore",
+        "city": "Mysuru",
+        "experience": "36 years",
+        "phone": "0821-2491111 / +91 1800 102 4647",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0082",
+        "name": "Dr Harsha",
+        "specialty": "General Physician",
+        "hospital": "Manipal Hospitals Mysore",
+        "city": "Mysuru",
+        "experience": "2 years",
+        "phone": "0821-2491111 / +91 1800 102 4647",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0101",
+        "name": "Dr Nirmal Mathew Alex",
+        "specialty": "General Medicine",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "10 years",
+        "phone": "0821-2566666",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0102",
+        "name": "Dr Shruthi R",
+        "specialty": "General Medicine",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "6 years",
+        "phone": "0821-2566666",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0103",
+        "name": "Dr Vishwas K",
+        "specialty": "General Medicine",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "12 years",
+        "phone": "0821-2566666",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0104",
+        "name": "Dr Laya",
+        "specialty": "General Medicine",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "2 years",
+        "phone": "0821-2566666",
+        "domain": "general"
+      },
+      {
+        "id": "MYS-0105",
+        "name": "Dr Aima Pious K J",
+        "specialty": "General Medicine",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "2 years",
+        "phone": "0821-2566666",
+        "domain": "general"
+      }
+    ],
+    "general_surgery": [
+      {
+        "id": "MYS-0014",
+        "name": "Dr Akshay Anchan",
+        "specialty": "Plastic & Reconstructive Surgery",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "6+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general_surgery"
+      },
+      {
+        "id": "MYS-0039",
+        "name": "Dr Srinath S",
+        "specialty": "General Surgery",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "25+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general_surgery"
+      },
+      {
+        "id": "MYS-0058",
+        "name": "Dr Jayanth B N",
+        "specialty": "General Surgery",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "15+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "general_surgery"
+      },
+      {
+        "id": "MYS-0089",
+        "name": "Dr Sreeharsha M V",
+        "specialty": "General Surgery",
+        "hospital": "Manipal Hospitals Mysore",
+        "city": "Mysuru",
+        "experience": "24 years",
+        "phone": "0821-2491111 / +91 1800 102 4647",
+        "domain": "general_surgery"
+      },
+      {
+        "id": "MYS-0099",
+        "name": "Dr Ganesh G Gowda",
+        "specialty": "General Surgery / Vascular Surgery",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "Not listed",
+        "phone": "0821-2566666",
+        "domain": "general_surgery"
+      }
+    ],
+    "neurology": [
+      {
+        "id": "MYS-0015",
+        "name": "Dr Somanath Vasudev",
+        "specialty": "Neurosciences",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "20+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "neurology"
+      },
+      {
+        "id": "MYS-0021",
+        "name": "Dr Aumir Moin",
+        "specialty": "Neurosciences",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "22+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "neurology"
+      },
+      {
+        "id": "MYS-0026",
+        "name": "Dr Bopaiah K S",
+        "specialty": "Neurosciences",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "22+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "neurology"
+      },
+      {
+        "id": "MYS-0027",
+        "name": "Dr Jyotsna AS",
+        "specialty": "Pediatric Neurology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "12+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "neurology"
+      },
+      {
+        "id": "MYS-0028",
+        "name": "Dr Lokesh B L",
+        "specialty": "Neurosciences",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "20+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "neurology"
+      },
+      {
+        "id": "MYS-0077",
+        "name": "Dr Vinay Hegde S",
+        "specialty": "Neurosciences",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "4+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "neurology"
+      },
+      {
+        "id": "MYS-0083",
+        "name": "Dr Maqsood Ahmed Abdul Rahman",
+        "specialty": "Neurosurgery",
+        "hospital": "Manipal Hospitals Mysore",
+        "city": "Mysuru",
+        "experience": "26 years",
+        "phone": "0821-2491111 / +91 1800 102 4647",
+        "domain": "neurology"
+      },
+      {
+        "id": "MYS-0108",
+        "name": "Dr Shasthara",
+        "specialty": "Neurology",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "13 years",
+        "phone": "0821-2566666",
+        "domain": "neurology"
+      }
+    ],
+    "pediatrics": [
+      {
+        "id": "MYS-0016",
+        "name": "Dr Shankar Prasad",
+        "specialty": "Pediatric Intensivist",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "9+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "pediatrics"
+      },
+      {
+        "id": "MYS-0022",
+        "name": "Dr Sripathi Adhikari",
+        "specialty": "Pediatrics",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "33+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "pediatrics"
+      },
+      {
+        "id": "MYS-0044",
+        "name": "Dr Girish G",
+        "specialty": "Pediatrics",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "21+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "pediatrics"
+      },
+      {
+        "id": "MYS-0092",
+        "name": "Dr Chethan B",
+        "specialty": "Pediatrics",
+        "hospital": "Motherhood Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "17 years",
+        "phone": "0821-2566666",
+        "domain": "pediatrics"
+      },
+      {
+        "id": "MYS-0094",
+        "name": "Dr Suhaim Afsar",
+        "specialty": "Pediatrics",
+        "hospital": "Motherhood Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "14 years",
+        "phone": "0821-2566666",
+        "domain": "pediatrics"
+      },
+      {
+        "id": "MYS-0096",
+        "name": "Dr A C Apoorva",
+        "specialty": "Pediatrics",
+        "hospital": "Motherhood Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "7 years",
+        "phone": "0821-2566666",
+        "domain": "pediatrics"
+      }
+    ],
+    "dermatology": [
+      {
+        "id": "MYS-0031",
+        "name": "Dr Satish H V",
+        "specialty": "Cosmetology & Plastic Surgery",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "31+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "dermatology"
+      },
+      {
+        "id": "MYS-0056",
+        "name": "Dr Dayananda T R",
+        "specialty": "Dermatology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "16+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "dermatology"
+      },
+      {
+        "id": "MYS-0080",
+        "name": "Dr Prarthana T",
+        "specialty": "Dermatology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "2+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "dermatology"
+      }
+    ],
+    "ent": [
+      {
+        "id": "MYS-0032",
+        "name": "Dr Harindra M N",
+        "specialty": "ENT",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "30+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "ent"
+      },
+      {
+        "id": "MYS-0037",
+        "name": "Dr Girish N Kulkarni",
+        "specialty": "ENT",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "25+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "ent"
+      },
+      {
+        "id": "MYS-0060",
+        "name": "Dr Kavitha Prakash Palled",
+        "specialty": "ENT - Head and Neck Skull Base Surgery",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "12+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "ent"
+      },
+      {
+        "id": "MYS-0067",
+        "name": "Dr Harshitha N",
+        "specialty": "ENT",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "8+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "ent"
+      }
+    ],
+    "urology": [
+      {
+        "id": "MYS-0033",
+        "name": "Dr Raghavendra M",
+        "specialty": "Urology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "29+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "urology"
+      },
+      {
+        "id": "MYS-0084",
+        "name": "Dr Thimmaiah K A",
+        "specialty": "Urology",
+        "hospital": "Manipal Hospitals Mysore",
+        "city": "Mysuru",
+        "experience": "11 years",
+        "phone": "0821-2491111 / +91 1800 102 4647",
+        "domain": "urology"
+      },
+      {
+        "id": "MYS-0107",
+        "name": "Dr Amruthraj G Gowda",
+        "specialty": "Urology",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "34 years",
+        "phone": "0821-2566666",
+        "domain": "urology"
+      }
+    ],
+    "emergency_critical_care": [
+      {
+        "id": "MYS-0036",
+        "name": "Dr Harish M Nayak",
+        "specialty": "Intensive Care",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "26+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      },
+      {
+        "id": "MYS-0040",
+        "name": "Dr RamaKrishna M N",
+        "specialty": "Critical Care",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "25+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      },
+      {
+        "id": "MYS-0043",
+        "name": "Dr Venkatesh Murthy M R",
+        "specialty": "Critical Care & Emergency Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "22+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      },
+      {
+        "id": "MYS-0048",
+        "name": "Dr Seethalakshmy Somanath",
+        "specialty": "Anaesthesiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "20+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      },
+      {
+        "id": "MYS-0049",
+        "name": "Dr Prakash Rao A S",
+        "specialty": "Anaesthesiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "20+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      },
+      {
+        "id": "MYS-0051",
+        "name": "Dr Prakash H.K",
+        "specialty": "Anesthesiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "19+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      },
+      {
+        "id": "MYS-0053",
+        "name": "Dr Girish M",
+        "specialty": "Anaesthesiologist / Intensive Care / Transplants",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "18+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      },
+      {
+        "id": "MYS-0065",
+        "name": "Dr Shivakumar Basavaradder",
+        "specialty": "Critical Care & Emergency Medicine",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "9+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      },
+      {
+        "id": "MYS-0066",
+        "name": "Dr Balachandra S R",
+        "specialty": "Intensive Care",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "9+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      },
+      {
+        "id": "MYS-0072",
+        "name": "Dr Seema Umesh",
+        "specialty": "Anaesthesiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "5+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      },
+      {
+        "id": "MYS-0075",
+        "name": "Dr H V Deepthi",
+        "specialty": "Anaesthesiology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "4+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "emergency_critical_care"
+      }
+    ],
+    "diabetology": [
+      {
+        "id": "MYS-0041",
+        "name": "Dr Anish Behl",
+        "specialty": "Endocrinology & Diabetes Care",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "24+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "diabetology"
+      }
+    ],
+    "ophthalmology": [
+      {
+        "id": "MYS-0045",
+        "name": "Dr S S Lakshmi",
+        "specialty": "Ophthalmology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "21+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "ophthalmology"
+      }
+    ],
+    "pulmonology": [
+      {
+        "id": "MYS-0050",
+        "name": "Dr Madhu K",
+        "specialty": "Pulmonology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "19+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "pulmonology"
+      },
+      {
+        "id": "MYS-0062",
+        "name": "Dr Avinash R",
+        "specialty": "Pulmonology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "11+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "pulmonology"
+      },
+      {
+        "id": "MYS-0063",
+        "name": "Dr Ganapriya G P",
+        "specialty": "Interventional Pulmonology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "10+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "pulmonology"
+      }
+    ],
+    "psychiatry": [
+      {
+        "id": "MYS-0055",
+        "name": "Dr Arti Behl",
+        "specialty": "Psychiatry & Psychology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "16+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "psychiatry"
+      },
+      {
+        "id": "MYS-0079",
+        "name": "Mr Manooj P",
+        "specialty": "Psychology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "4+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "psychiatry"
+      }
+    ],
+    "rheumatology": [
+      {
+        "id": "MYS-0073",
+        "name": "Dr Spoorthy Raj D R",
+        "specialty": "Rheumatology",
+        "hospital": "Apollo BGS Hospitals, Mysore",
+        "city": "Mysuru",
+        "experience": "4+ years",
+        "phone": "0821-2566666 / 0821-2568888",
+        "domain": "rheumatology"
+      },
+      {
+        "id": "MYS-0100",
+        "name": "Dr Subramanian R",
+        "specialty": "Rheumatology",
+        "hospital": "JSS Hospital, Mysore",
+        "city": "Mysuru",
+        "experience": "17 years",
+        "phone": "0821-2566666",
+        "domain": "rheumatology"
+      }
+    ]
+  }
+}

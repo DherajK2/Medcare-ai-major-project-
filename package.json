@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail \"npm --prefix frontend run dev\" \"npm --prefix anatomy run dev\""
+  },
+  "dependencies": {
+    "@supabase/server": "^1.5.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

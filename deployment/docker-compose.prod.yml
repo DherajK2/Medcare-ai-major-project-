@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  backend:
+    image: medical-ai-backend:latest
+    restart: always
+    environment:
+      - DEBUG=false
+      - ENVIRONMENT=production
+      - OCR_PROVIDER=paddle
+    ports:
+      - "8000:8000"
+
+  frontend:
+    image: medical-ai-frontend:latest
+    restart: always
+    ports:
+      - "3000:80"
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - backend
+      - frontend
+    restart: always
