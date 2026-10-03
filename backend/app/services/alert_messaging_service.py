@@ -298,10 +298,14 @@ class AlertMessagingService:
     # ------------------------------------------------------------------ #
 
     async def _send_email(self, recipient_email: str, subject: str, html_body: str, plain_body: str) -> dict:
-        """Send a real email via SMTP, or console/mailto in dev."""
+        """Send a real email via HTTPS REST API (Resend/Brevo/SendGrid) or SMTP SSL/TLS."""
         import asyncio
         from email.mime.multipart import MIMEMultipart
         from email.mime.text import MIMEText
+
+        resend_key = getattr(settings, "RESEND_API_KEY", None) or (getattr(settings, "EMAIL_API_KEY", None) if getattr(settings, "EMAIL_PROVIDER", "").lower() == "resend" else None)
+        brevo_key = getattr(settings, "BREVO_API_KEY", None) or (getattr(settings, "EMAIL_API_KEY", None) if getattr(settings, "EMAIL_PROVIDER", "").lower() == "brevo" else None)
+        sendgrid_key = getattr(settings, "SENDGRID_API_KEY", None) or (getattr(settings, "EMAIL_API_KEY", None) if getattr(settings, "EMAIL_PROVIDER", "").lower() == "sendgrid" else None)
 
         smtp_user = getattr(settings, "SMTP_USER", None)
         smtp_pass = getattr(settings, "SMTP_PASSWORD", None)
@@ -309,6 +313,75 @@ class AlertMessagingService:
         smtp_port = getattr(settings, "SMTP_PORT", 587)
         email_from = smtp_user if (smtp_user and "@" in smtp_user) else getattr(settings, "EMAIL_FROM", "noreply@medcare.ai")
 
+        # 1. Try Resend HTTPS REST API (Port 443 - Never blocked on Cloud/Render)
+        if resend_key:
+            try:
+                headers = {
+                    "Authorization": f"Bearer {resend_key.strip()}",
+                    "Content-Type": "application/json"
+                }
+                from_addr = "MedCare AI <onboarding@resend.dev>" if ("resend.dev" in getattr(settings, "EMAIL_FROM", "") or "@" not in getattr(settings, "EMAIL_FROM", "")) else getattr(settings, "EMAIL_FROM", "onboarding@resend.dev")
+                payload = {
+                    "from": from_addr,
+                    "to": [recipient_email],
+                    "subject": subject,
+                    "html": html_body,
+                    "text": plain_body
+                }
+                async with httpx.AsyncClient(timeout=15.0) as client:
+                    resp = await client.post("https://api.resend.com/emails", headers=headers, json=payload)
+                    if resp.status_code in [200, 201, 202]:
+                        logger.info(f"[AlertMsg/Email] Delivered via Resend API to {recipient_email}")
+                        return {"status": "sent", "provider": "resend", "recipient_email": recipient_email, "id": resp.json().get("id")}
+                    else:
+                        logger.warning(f"[AlertMsg/Email] Resend API returned {resp.status_code}: {resp.text}")
+            except Exception as e:
+                logger.warning(f"[AlertMsg/Email] Resend API error: {e}")
+
+        # 2. Try Brevo HTTPS REST API (Port 443)
+        if brevo_key:
+            try:
+                headers = {
+                    "api-key": brevo_key.strip(),
+                    "Content-Type": "application/json"
+                }
+                payload = {
+                    "sender": {"name": "MedCare AI", "email": email_from},
+                    "to": [{"email": recipient_email}],
+                    "subject": subject,
+                    "htmlContent": html_body,
+                    "textContent": plain_body
+                }
+                async with httpx.AsyncClient(timeout=15.0) as client:
+                    resp = await client.post("https://api.brevo.com/v3/smtp/email", headers=headers, json=payload)
+                    if resp.status_code in [200, 201, 202]:
+                        logger.info(f"[AlertMsg/Email] Delivered via Brevo API to {recipient_email}")
+                        return {"status": "sent", "provider": "brevo", "recipient_email": recipient_email}
+            except Exception as e:
+                logger.warning(f"[AlertMsg/Email] Brevo API error: {e}")
+
+        # 3. Try SendGrid HTTPS REST API (Port 443)
+        if sendgrid_key:
+            try:
+                headers = {
+                    "Authorization": f"Bearer {sendgrid_key.strip()}",
+                    "Content-Type": "application/json"
+                }
+                payload = {
+                    "personalizations": [{"to": [{"email": recipient_email}]}],
+                    "from": {"email": email_from, "name": "MedCare AI"},
+                    "subject": subject,
+                    "content": [{"type": "text/html", "value": html_body}]
+                }
+                async with httpx.AsyncClient(timeout=15.0) as client:
+                    resp = await client.post("https://api.sendgrid.com/v3/mail/send", headers=headers, json=payload)
+                    if resp.status_code in [200, 201, 202]:
+                        logger.info(f"[AlertMsg/Email] Delivered via SendGrid API to {recipient_email}")
+                        return {"status": "sent", "provider": "sendgrid", "recipient_email": recipient_email}
+            except Exception as e:
+                logger.warning(f"[AlertMsg/Email] SendGrid API error: {e}")
+
+        # 4. Try direct SMTP (SSL Port 465 or TLS 587)
         if smtp_user and smtp_pass:
             try:
                 def _do_send():
@@ -321,7 +394,7 @@ class AlertMessagingService:
                     msg.attach(MIMEText(plain_body, "plain"))
                     msg.attach(MIMEText(html_body, "html"))
 
-                    # 1. Try secure SMTP_SSL on port 465 (accessible on cloud hosts like Render)
+                    # 1. Try secure SMTP_SSL on port 465
                     try:
                         context = ssl.create_default_context()
                         with smtplib.SMTP_SSL(smtp_host, 465, context=context, timeout=12) as server:
@@ -347,7 +420,7 @@ class AlertMessagingService:
                 return {"status": "failed", "provider": "smtp", "error": str(e)}
 
         # Fallback / simulated console email delivery
-        logger.info(f"[AlertMsg/Email] SMTP not configured. Logged alert email to {recipient_email}")
+        logger.info(f"[AlertMsg/Email] No live email transport configured. Logged alert email to {recipient_email}")
         return {
             "status": "sent",
             "provider": "email_service",

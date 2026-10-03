@@ -22,6 +22,9 @@ class Settings(BaseSettings):
     PINECONE_DIMENSION: int = 768
     EMAIL_PROVIDER: str = "smtp"
     EMAIL_API_KEY: Optional[str] = None
+    RESEND_API_KEY: Optional[str] = None
+    BREVO_API_KEY: Optional[str] = None
+    SENDGRID_API_KEY: Optional[str] = None
     EMAIL_FROM: str = "noreply@medcare.ai"
     SMTP_HOST: Optional[str] = "smtp.gmail.com"
     SMTP_PORT: int = 587
