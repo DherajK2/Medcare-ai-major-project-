@@ -521,43 +521,62 @@ class SarvamService:
             clean_vars.setdefault("location", "Mysuru, Karnataka")
             clean_vars.setdefault("symptoms", "Severe distress")
 
-        # Generate candidate payloads to handle different published agent versions dynamically
-        payload_variations = []
-        for ver in [resolved_version, None, 1, 2, 3, 4]:
-            if ver in [p.get("app_version") for p in payload_variations]:
-                continue
-            
-            p_config = {
+        # Generate candidate payloads to handle both flat and nested Sarvam schemas
+        payload_variations = [
+            # Schema 1: Direct flat schema
+            {
                 "app_id": app_id,
-                "agent_variables": clean_vars,
+                "user_phone_number": clean_target,
+                "connection_id": connection_id,
+                "agent_variables": clean_vars
+            },
+            # Schema 2: Flat with connection_config
+            {
+                "app_id": app_id,
+                "user_phone_number": clean_target,
                 "connection_config": {
                     "connection_id": connection_id,
                     "agent_phone_number": agent_phone
-                }
-            }
-            if ver is not None:
-                p_config["app_version"] = ver
-
-            p_load = {
+                },
+                "agent_variables": clean_vars
+            },
+            # Schema 3: Nested app_config & user_config
+            {
                 "app_id": app_id,
                 "user_phone_number": clean_target,
                 "agent_variables": clean_vars,
-                "app_config": p_config,
+                "app_config": {
+                    "app_id": app_id,
+                    "agent_variables": clean_vars,
+                    "connection_config": {
+                        "connection_id": connection_id,
+                        "agent_phone_number": agent_phone
+                    }
+                },
                 "user_config": {
                     "user_phone_number": clean_target,
                     "agent_variables": clean_vars,
                     "user_variables": clean_vars
                 }
             }
-            if ver is not None:
-                p_load["app_version"] = ver
+        ]
 
-            payload_variations.append(p_load)
+        # Add versions if explicitly specified
+        if resolved_version:
+            payload_variations.append({
+                "app_id": app_id,
+                "app_version": resolved_version,
+                "user_phone_number": clean_target,
+                "connection_id": connection_id,
+                "agent_variables": clean_vars
+            })
 
         endpoints_to_try = [
             f"https://apps.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
-            f"https://api.sarvam.ai/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
-            f"https://api.sarvam.ai/v1/voice-agents/outbound"
+            f"https://apps.sarvam.ai/api/voice-agents/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
+            f"https://api.sarvam.ai/v1/voice-agents/outbound",
+            f"https://api.sarvam.ai/v1/outbounds",
+            f"https://apps.sarvam.ai/api/v1/outbounds"
         ]
 
         logger.info(f"Triggering Sarvam outbound voice call to {clean_target} using agent {app_id} in org {org_id} workspace {workspace_id}")
