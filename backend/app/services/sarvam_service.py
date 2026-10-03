@@ -448,12 +448,20 @@ class SarvamService:
 
         endpoint = f"https://apps.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds"
 
-        headers = {
-            "X-API-Key": api_key.strip() if api_key else "",
-            "api-subscription-key": api_key.strip() if api_key else "",
-            "Authorization": f"Bearer {api_key.strip()}" if api_key else "",
-            "Content-Type": "application/json"
-        }
+        clean_key = (api_key or "").strip()
+        candidate_headers = []
+        if clean_key.startswith("sk_"):
+            candidate_headers = [
+                {"X-API-Key": clean_key, "Content-Type": "application/json"},
+                {"Authorization": f"Bearer {clean_key}", "Content-Type": "application/json"},
+                {"api-subscription-key": clean_key, "Content-Type": "application/json"}
+            ]
+        else:
+            candidate_headers = [
+                {"api-subscription-key": clean_key, "Content-Type": "application/json"},
+                {"X-API-Key": clean_key, "Content-Type": "application/json"},
+                {"Authorization": f"Bearer {clean_key}", "Content-Type": "application/json"}
+            ]
 
         # Build app_config - Sarvam requires app_version parameter (integer)
         if app_version is not None:
@@ -536,27 +544,32 @@ class SarvamService:
 
         try:
             async with httpx.AsyncClient(timeout=30.0) as client:
-                res = await client.post(endpoint, headers=headers, json=payload)
-                if res.status_code in [200, 201, 202]:
-                    data = res.json()
-                    logger.info(f"Sarvam outbound call successfully initiated: {data}")
-                    return {
-                        "success": True,
-                        "call_id": data.get("id") or data.get("outbound_id") or data.get("interaction_id") or "initiated",
-                        "status": "initiated",
-                        "target_phone": clean_target,
-                        "agent_id": app_id,
-                        "details": data
-                    }
-                else:
-                    logger.error(f"Sarvam outbound call returned HTTP {res.status_code}: {res.text}")
-                    return {
-                        "success": False,
-                        "status": "failed",
-                        "status_code": res.status_code,
-                        "error": res.text,
-                        "target_phone": clean_target
-                    }
+                last_res = None
+                for headers in candidate_headers:
+                    res = await client.post(endpoint, headers=headers, json=payload)
+                    last_res = res
+                    if res.status_code in [200, 201, 202]:
+                        data = res.json()
+                        logger.info(f"Sarvam outbound call successfully initiated: {data}")
+                        return {
+                            "success": True,
+                            "call_id": data.get("id") or data.get("outbound_id") or data.get("interaction_id") or "initiated",
+                            "status": "initiated",
+                            "target_phone": clean_target,
+                            "agent_id": app_id,
+                            "details": data
+                        }
+                    elif res.status_code != 401:
+                        break  # Non-auth error like 422/400
+
+                logger.error(f"Sarvam outbound call returned HTTP {last_res.status_code if last_res else 500}: {last_res.text if last_res else 'No response'}")
+                return {
+                    "success": False,
+                    "status": "failed",
+                    "status_code": last_res.status_code if last_res else 500,
+                    "error": last_res.text if last_res else "No response",
+                    "target_phone": clean_target
+                }
         except Exception as e:
             logger.error(f"Sarvam outbound call exception: {e}")
             return {
