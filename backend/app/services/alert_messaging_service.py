@@ -313,6 +313,7 @@ class AlertMessagingService:
             try:
                 def _do_send():
                     import smtplib
+                    import ssl
                     msg = MIMEMultipart("alternative")
                     msg["Subject"] = subject
                     msg["From"] = email_from
@@ -320,6 +321,17 @@ class AlertMessagingService:
                     msg.attach(MIMEText(plain_body, "plain"))
                     msg.attach(MIMEText(html_body, "html"))
 
+                    # 1. Try secure SMTP_SSL on port 465 (accessible on cloud hosts like Render)
+                    try:
+                        context = ssl.create_default_context()
+                        with smtplib.SMTP_SSL(smtp_host, 465, context=context, timeout=12) as server:
+                            server.login(smtp_user, smtp_pass)
+                            server.sendmail(email_from, [recipient_email], msg.as_string())
+                        return True
+                    except Exception as ssl_err:
+                        logger.debug(f"SMTP_SSL on 465 fallback to 587: {ssl_err}")
+
+                    # 2. Try SMTP with STARTTLS on port 587
                     with smtplib.SMTP(smtp_host, smtp_port, timeout=12) as server:
                         if getattr(settings, "SMTP_TLS", True):
                             server.starttls()

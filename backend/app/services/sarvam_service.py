@@ -449,19 +449,15 @@ class SarvamService:
         endpoint = f"https://apps.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds"
 
         clean_key = (api_key or "").strip()
-        candidate_headers = []
-        if clean_key.startswith("sk_"):
-            candidate_headers = [
-                {"X-API-Key": clean_key, "Content-Type": "application/json"},
-                {"Authorization": f"Bearer {clean_key}", "Content-Type": "application/json"},
-                {"api-subscription-key": clean_key, "Content-Type": "application/json"}
-            ]
-        else:
-            candidate_headers = [
-                {"api-subscription-key": clean_key, "Content-Type": "application/json"},
-                {"X-API-Key": clean_key, "Content-Type": "application/json"},
-                {"Authorization": f"Bearer {clean_key}", "Content-Type": "application/json"}
-            ]
+        candidate_headers = [
+            {"X-API-Key": clean_key, "Content-Type": "application/json"}
+        ]
+        if not clean_key.startswith("sk_"):
+            candidate_headers.append({
+                "X-API-Key": clean_key,
+                "api-subscription-key": clean_key,
+                "Content-Type": "application/json"
+            })
 
         # Build app_config - Sarvam requires app_version parameter (integer)
         if app_version is not None:
