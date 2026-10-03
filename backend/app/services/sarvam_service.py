@@ -538,7 +538,7 @@ class SarvamService:
 
         endpoints_to_try = [
             f"https://apps.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
-            f"https://indus.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds"
+            f"https://api.sarvam.ai/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds"
         ]
 
         logger.info(f"Triggering Sarvam outbound voice call to {clean_target} using agent {app_id} v{resolved_version} in org {org_id} workspace {workspace_id}")
@@ -548,25 +548,32 @@ class SarvamService:
                 last_res = None
                 for endpoint_url in endpoints_to_try:
                     for headers in candidate_headers:
-                        res = await client.post(endpoint_url, headers=headers, json=payload)
-                        last_res = res
-                        if res.status_code in [200, 201, 202]:
-                            data = res.json()
-                            logger.info(f"Sarvam outbound call successfully initiated via {endpoint_url}: {data}")
-                            return {
-                                "success": True,
-                                "call_id": data.get("id") or data.get("outbound_id") or data.get("interaction_id") or "initiated",
-                                "status": "initiated",
-                                "target_phone": clean_target,
-                                "agent_id": app_id,
-                                "details": data
-                            }
-                        elif res.status_code == 401:
-                            continue  # Try next candidate header/endpoint
-                        elif res.status_code == 404:
-                            break  # Try next endpoint URL
-                        else:
-                            break
+                        try:
+                            res = await client.post(endpoint_url, headers=headers, json=payload)
+                            last_res = res
+                            if res.status_code in [200, 201, 202]:
+                                try:
+                                    data = res.json()
+                                    if isinstance(data, dict):
+                                        logger.info(f"Sarvam outbound call successfully initiated via {endpoint_url}: {data}")
+                                        return {
+                                            "success": True,
+                                            "call_id": data.get("id") or data.get("outbound_id") or data.get("interaction_id") or "initiated",
+                                            "status": "initiated",
+                                            "target_phone": clean_target,
+                                            "agent_id": app_id,
+                                            "details": data
+                                        }
+                                except Exception:
+                                    continue
+                            elif res.status_code == 401:
+                                continue  # Try next candidate header
+                            elif res.status_code == 404:
+                                break  # Try next endpoint URL
+                            else:
+                                break
+                        except Exception as req_err:
+                            logger.warning(f"Error requesting {endpoint_url}: {req_err}")
 
                 logger.error(f"Sarvam outbound call returned HTTP {last_res.status_code if last_res else 500}: {last_res.text if last_res else 'No response'}")
                 return {
