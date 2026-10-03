@@ -521,59 +521,65 @@ class SarvamService:
             clean_vars.setdefault("location", "Mysuru, Karnataka")
             clean_vars.setdefault("symptoms", "Severe distress")
 
-        # Generate candidate payloads to handle both flat and nested Sarvam schemas
+        # Generate candidate payloads matching official Sarvam Samvaad Outbound Call API specification
         payload_variations = [
-            # Schema 1: Direct flat schema
+            # Schema 1: Official Sarvam nested app_config + connection_config + user_config
             {
-                "app_id": app_id,
-                "user_phone_number": clean_target,
-                "connection_id": connection_id,
-                "agent_variables": clean_vars
-            },
-            # Schema 2: Flat with connection_config
-            {
-                "app_id": app_id,
-                "user_phone_number": clean_target,
-                "connection_config": {
-                    "connection_id": connection_id,
-                    "agent_phone_number": agent_phone
-                },
-                "agent_variables": clean_vars
-            },
-            # Schema 3: Nested app_config & user_config
-            {
-                "app_id": app_id,
-                "user_phone_number": clean_target,
-                "agent_variables": clean_vars,
                 "app_config": {
                     "app_id": app_id,
-                    "agent_variables": clean_vars,
+                    "app_version": resolved_version,
                     "connection_config": {
                         "connection_id": connection_id,
                         "agent_phone_number": agent_phone
-                    }
+                    },
+                    "agent_variables": clean_vars
                 },
                 "user_config": {
                     "user_phone_number": clean_target,
-                    "agent_variables": clean_vars,
                     "user_variables": clean_vars
+                },
+                "webhook_config": {
+                    "url": "https://medcare-ai-major-project.onrender.com/api/telephony/webhook/sarvam-call-summary"
                 }
-            }
-        ]
-
-        # Add versions if explicitly specified
-        if resolved_version:
-            payload_variations.append({
+            },
+            # Schema 2: Without agent_phone_number in connection_config
+            {
+                "app_config": {
+                    "app_id": app_id,
+                    "app_version": resolved_version,
+                    "connection_config": {
+                        "connection_id": connection_id
+                    },
+                    "agent_variables": clean_vars
+                },
+                "user_config": {
+                    "user_phone_number": clean_target
+                }
+            },
+            # Schema 3: Without app_version (defaults to active published agent version)
+            {
+                "app_config": {
+                    "app_id": app_id,
+                    "connection_config": {
+                        "connection_id": connection_id
+                    }
+                },
+                "user_config": {
+                    "user_phone_number": clean_target
+                }
+            },
+            # Schema 4: Flat direct schema
+            {
                 "app_id": app_id,
-                "app_version": resolved_version,
                 "user_phone_number": clean_target,
                 "connection_id": connection_id,
                 "agent_variables": clean_vars
-            })
+            }
+        ]
 
         endpoints_to_try = [
-            f"https://apps.sarvam.ai/api/app-runtime/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
             f"https://apps.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
+            f"https://apps.sarvam.ai/api/app-runtime/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
             f"https://agents.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
             f"https://api.sarvam.ai/v1/voice-agents/outbound"
         ]
