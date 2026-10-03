@@ -307,7 +307,7 @@ class AlertMessagingService:
         smtp_pass = getattr(settings, "SMTP_PASSWORD", None)
         smtp_host = getattr(settings, "SMTP_HOST", "smtp.gmail.com")
         smtp_port = getattr(settings, "SMTP_PORT", 587)
-        email_from = getattr(settings, "EMAIL_FROM", "noreply@medcare.ai")
+        email_from = smtp_user if (smtp_user and "@" in smtp_user) else getattr(settings, "EMAIL_FROM", "noreply@medcare.ai")
 
         if smtp_user and smtp_pass:
             try:
