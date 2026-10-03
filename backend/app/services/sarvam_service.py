@@ -424,19 +424,27 @@ class SarvamService:
         Trigger an automated outbound voice call via Sarvam AI Voice Agent platform.
         Uses latest published agent version (or specified version).
         """
-        api_key = self.api_key or settings.SARVAM_API_KEY
-        org_id = settings.SARVAM_ORG_ID
-        workspace_id = settings.SARVAM_WORKSPACE_ID
-        connection_id = settings.SARVAM_CONNECTION_ID
+        def _clean_id(raw_val: Optional[str]) -> str:
+            if not raw_val:
+                return ""
+            s = str(raw_val).strip()
+            if "/" in s:
+                s = s.rstrip("/").split("/")[-1]
+            return s.strip()
+
+        api_key = (self.api_key or settings.SARVAM_API_KEY or "").strip()
+        org_id = _clean_id(settings.SARVAM_ORG_ID or "01a05e64-a78a-74b4-ace2-6a4749e4876b")
+        workspace_id = _clean_id(settings.SARVAM_WORKSPACE_ID or "01a05e64-a79d-78b0-8718-01f0caed2249")
+        connection_id = _clean_id(settings.SARVAM_CONNECTION_ID or "44dbf942-36-b6a718e2-845a")
         agent_phone = settings.SARVAM_AGENT_PHONE_NUMBER or "+918071582685"
         
         # Route to appropriate specialized agent
         if agent_id:
-            app_id = agent_id
+            app_id = _clean_id(agent_id)
         elif context_data and ("blood_bank_name" in context_data or "blood_group" in context_data):
-            app_id = getattr(settings, "SARVAM_BLOOD_BANK_APP_ID", None) or "Emergency-B-7af1e36f-7382"
+            app_id = _clean_id(getattr(settings, "SARVAM_BLOOD_BANK_APP_ID", None) or "Emergency-B-7af1e36f-7382")
         else:
-            app_id = getattr(settings, "SARVAM_EMERGENCY_APP_ID", None) or getattr(settings, "SARVAM_APP_ID", None) or "MedCare-Eme-abd37307-3a0f"
+            app_id = _clean_id(getattr(settings, "SARVAM_EMERGENCY_APP_ID", None) or getattr(settings, "SARVAM_APP_ID", None) or "MedCare-Eme-abd37307-3a0f")
 
         # Format Indian phone number to E.164 (e.g. +918310341645)
         clean_target = target_phone_number.strip().replace(" ", "").replace("-", "")
