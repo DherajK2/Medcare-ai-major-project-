@@ -130,7 +130,7 @@ function HealthVisualizerCarousel() {
     dragStart.current = null;
   };
 
-  const viewerUrl = `http://localhost:3000/en?organ=${activeOrgan.id}`;
+  const viewerUrl = `/visualise?organ=${activeOrgan.id}`;
 
   return (
     <div className="w-full max-w-sm mx-auto select-none" aria-label="3D Health Visualizer">

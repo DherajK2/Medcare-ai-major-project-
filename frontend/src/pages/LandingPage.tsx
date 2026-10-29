@@ -145,13 +145,12 @@ export default function LandingPage() {
           <div className="lp-hero-content">
             <div className="lp-trust-pill">
               <span className="lp-check">✓</span>
-              Trusted by Families across India
+              <span>Trusted by Families across India</span>
             </div>
 
-            <h1>
+            <h1 className="lp-hero-title">
               Never Let Your Patient<br />
-              Go Unmonitored<br />
-              <span>Ever Again</span>
+              Go Unmonitored <span className="lp-hero-highlight">Ever Again</span>
             </h1>
 
             <p className="lp-hero-desc">
@@ -160,22 +159,25 @@ export default function LandingPage() {
             </p>
 
             <div className="lp-pills">
-              <span>✓ AI Report Analysis</span>
-              <span>✓ WhatsApp Alerts</span>
-              <span>✓ 24/7 Monitoring</span>
-              <span>✓ Multilingual Chat</span>
+              <span><span className="lp-pill-dot">✦</span> AI Report Analysis</span>
+              <span><span className="lp-pill-dot">⚡</span> WhatsApp Alerts</span>
+              <span><span className="lp-pill-dot">🛡️</span> 24/7 Monitoring</span>
+              <span><span className="lp-pill-dot">🌐</span> Multilingual Chat</span>
             </div>
 
             <div className="lp-hero-actions">
               <button className="lp-main-btn" onClick={() => navigate('/register')}>
-                Start Monitoring Free <span>→</span>
+                Start Monitoring Free <span className="lp-btn-arrow">→</span>
               </button>
               <button className="lp-sec-btn" onClick={() => navigate('/visualise')}>
-                Visualise Anatomy
+                <span className="lp-cube-icon">👁</span> Visualise 3D Anatomy
               </button>
-              <button className="lp-sec-btn" onClick={() => navigate('/login')}>
-                Sign In
-              </button>
+            </div>
+
+            <div className="lp-hero-subnote">
+              <span>Already using MedCare AI? <a onClick={() => navigate('/login')} className="lp-signin-link">Sign In</a></span>
+              <span className="lp-subnote-sep">·</span>
+              <span>No credit card required</span>
             </div>
           </div>
 
@@ -454,13 +456,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* ======================================================
-          FLOATING DEMO BUTTON
-      ====================================================== */}
-      <button className="lp-float-demo" onClick={() => navigate('/register')}>
-        <span>▣</span> Start Free
-      </button>
 
       {/* ======================================================
           FOOTER

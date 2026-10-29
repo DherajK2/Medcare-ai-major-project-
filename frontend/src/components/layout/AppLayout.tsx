@@ -4,9 +4,10 @@ import { Sidebar } from './Sidebar';
 import { PatientSelector } from '../patient/PatientSelector';
 import { NotificationPermissionBanner } from '../alerts/NotificationPermissionBanner';
 import { usePushNotifications } from '../../hooks/usePushNotifications';
-import { Bell, Menu, X, HeartPulse } from 'lucide-react';
+import { Bell, Menu, X, HeartPulse, LogOut } from 'lucide-react';
 import { useAlertStore } from '../../store/alertStore';
 import { usePatients } from '../../hooks/usePatients';
+import { useAuthStore } from '../../store/authStore';
 
 function PushNotificationController() {
   usePushNotifications();
@@ -17,6 +18,7 @@ export default function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { alerts } = useAlertStore();
   const { activePatient } = usePatients();
+  const { user, signOut } = useAuthStore();
   const unread = alerts.filter(a => !a.is_read && (a.severity === 'HIGH' || a.severity === 'CRITICAL')).length;
 
   return (
@@ -103,6 +105,29 @@ export default function AppLayout() {
                 </span>
               )}
             </Link>
+
+            {user && (
+              <div className="flex items-center gap-2 pl-2 border-l border-gray-200">
+                <div 
+                  className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shadow-xs select-none"
+                  title={user.displayName || user.email || 'User Profile'}
+                >
+                  {(user.displayName || user.email || 'U')[0].toUpperCase()}
+                </div>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await signOut();
+                    window.location.assign('/login');
+                  }}
+                  className="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                  title="Sign Out"
+                  aria-label="Sign Out"
+                >
+                  <LogOut size={18} />
+                </button>
+              </div>
+            )}
           </div>
         </header>
 

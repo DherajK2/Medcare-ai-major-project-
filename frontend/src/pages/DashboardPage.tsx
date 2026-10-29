@@ -63,7 +63,8 @@ const METRIC_UNIT: Record<string, string> = {
 };
 
 /* ── Status badge ── */
-function StatusBadge({ status }: { status: 'normal' | 'elevated' | 'abnormal' }) {
+function StatusBadge({ status }: { status: 'normal' | 'elevated' | 'abnormal' | 'no_data' }) {
+  if (status === 'no_data')  return <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full"><Minus size={11} />No Data</span>;
   if (status === 'normal')   return <span className="badge-normal"><CircleCheck size={11} />Normal</span>;
   if (status === 'elevated') return <span className="badge-elevated"><TriangleAlert size={11} />Elevated</span>;
   return <span className="badge-abnormal"><AlertTriangle size={11} />Abnormal</span>;
@@ -74,9 +75,9 @@ function VitalCard({
   title, value, unit, icon: Icon, iconColor, status, trend
 }: {
   title: string; value: string; unit: string; icon: React.ElementType;
-  iconColor: string; status: 'normal' | 'elevated' | 'abnormal'; trend: string;
+  iconColor: string; status: 'normal' | 'elevated' | 'abnormal' | 'no_data'; trend: string;
 }) {
-  const borderColor = status === 'normal' ? 'border-gray-100' : status === 'elevated' ? 'border-amber-200' : 'border-red-200';
+  const borderColor = status === 'no_data' ? 'border-gray-100' : status === 'normal' ? 'border-emerald-100' : status === 'elevated' ? 'border-amber-200' : 'border-red-200';
   return (
     <div className={`metric-card card-hover border ${borderColor} animate-fade-in`}>
       <div className="flex items-start justify-between mb-3">
@@ -91,10 +92,16 @@ function VitalCard({
         {unit && <span className="text-sm text-gray-400 font-medium">{unit}</span>}
       </div>
       <div className="mt-2 flex items-center gap-1 text-xs text-gray-400">
-        {trend === 'increasing' ? <TrendingUp size={12} className="text-red-400" /> :
-         trend === 'decreasing' ? <TrendingDown size={12} className="text-green-400" /> :
-         <Minus size={12} className="text-gray-400" />}
-        <span>{trend === 'stable' ? 'Stable' : trend === 'increasing' ? 'Rising' : 'Falling'}</span>
+        {trend === 'no_data' ? (
+          <span className="text-gray-400 text-[11px]">Awaiting report</span>
+        ) : (
+          <>
+            {trend === 'increasing' ? <TrendingUp size={12} className="text-red-400" /> :
+             trend === 'decreasing' ? <TrendingDown size={12} className="text-green-400" /> :
+             <Minus size={12} className="text-gray-400" />}
+            <span>{trend === 'stable' ? 'Stable' : trend === 'increasing' ? 'Rising' : 'Falling'}</span>
+          </>
+        )}
       </div>
     </div>
   );
@@ -243,28 +250,41 @@ export default function DashboardPage() {
 
       {/* ── Vitals grid ── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <VitalCard title="Blood Pressure" value={bp} unit="mmHg" icon={Heart}
-          iconColor="bg-red-50 text-red-500" status={bpStatus} trend="stable" />
         <VitalCard
-          title="Blood Glucose" icon={Droplets} iconColor="bg-blue-50 text-blue-500"
+          title="Blood Pressure"
+          value={bp}
+          unit={bp === '—' ? '' : 'mmHg'}
+          icon={Heart}
+          iconColor="bg-red-50 text-red-500"
+          status={bp === '—' ? 'no_data' : bpStatus}
+          trend={bp === '—' ? 'no_data' : 'stable'}
+        />
+        <VitalCard
+          title="Blood Glucose"
+          icon={Droplets}
+          iconColor="bg-blue-50 text-blue-500"
           value={get('blood_glucose') ? `${Math.round(get('blood_glucose')!.value)}` : '—'}
           unit={get('blood_glucose') ? 'mg/dL' : ''}
-          status={get('blood_glucose') ? getMetricStatus('blood_glucose', get('blood_glucose')!.value) : 'normal'}
-          trend="stable"
+          status={get('blood_glucose') ? getMetricStatus('blood_glucose', get('blood_glucose')!.value) : 'no_data'}
+          trend={get('blood_glucose') ? 'stable' : 'no_data'}
         />
         <VitalCard
-          title="Heart Rate" icon={Activity} iconColor="bg-pink-50 text-pink-500"
+          title="Heart Rate"
+          icon={Activity}
+          iconColor="bg-pink-50 text-pink-500"
           value={get('heart_rate') ? `${Math.round(get('heart_rate')!.value)}` : '—'}
           unit={get('heart_rate') ? 'bpm' : ''}
-          status={get('heart_rate') ? getMetricStatus('heart_rate', get('heart_rate')!.value) : 'normal'}
-          trend="stable"
+          status={get('heart_rate') ? getMetricStatus('heart_rate', get('heart_rate')!.value) : 'no_data'}
+          trend={get('heart_rate') ? 'stable' : 'no_data'}
         />
         <VitalCard
-          title="Oxygen (SpO₂)" icon={Wind} iconColor="bg-sky-50 text-sky-500"
+          title="Oxygen (SpO₂)"
+          icon={Wind}
+          iconColor="bg-sky-50 text-sky-500"
           value={get('oxygen_saturation') ? `${Math.round(get('oxygen_saturation')!.value)}` : '—'}
           unit={get('oxygen_saturation') ? '%' : ''}
-          status={get('oxygen_saturation') ? getMetricStatus('oxygen_saturation', get('oxygen_saturation')!.value) : 'normal'}
-          trend="stable"
+          status={get('oxygen_saturation') ? getMetricStatus('oxygen_saturation', get('oxygen_saturation')!.value) : 'no_data'}
+          trend={get('oxygen_saturation') ? 'stable' : 'no_data'}
         />
       </div>
 

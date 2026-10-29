@@ -222,7 +222,7 @@ export default function LoginPage() {
             ))}
             <button
               type="button"
-              onClick={() => window.location.assign('http://localhost:3000/en')}
+              onClick={() => window.location.assign('/visualise')}
               className="mt-5 w-full rounded-xl border border-white/30 bg-white/10 px-4 py-3 text-left text-white transition hover:bg-white/20"
             >
               <span className="flex items-center gap-2 text-sm font-semibold"><Star className="h-4 w-4 text-yellow-300" /> Visualise anatomy</span>

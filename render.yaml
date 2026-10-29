@@ -1,0 +1,61 @@
+services:
+  - type: web
+    name: medcare-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SARVAM_API_KEY
+        sync: false
+      - key: SARVAM_SAMVAAD_API_KEY
+        sync: false
+      - key: SARVAM_ORG_ID
+        value: 01a05e64-a78a-74b4-ace2-6a4749e4876b
+      - key: SARVAM_WORKSPACE_ID
+        value: 01a05e64-a79d-78b0-8718-01f0caed2249
+      - key: SARVAM_CONNECTION_ID
+        value: 44dbf942-36-b6a718e2-845a
+      - key: SARVAM_BLOOD_BANK_APP_ID
+        value: Emergency-B-7af1e36f-7382
+      - key: SARVAM_EMERGENCY_APP_ID
+        value: MedCare-Eme-abd37307-3a0f
+      - key: SARVAM_BLOOD_BANK_APP_VERSION
+        value: "5"
+      - key: SARVAM_EMERGENCY_APP_VERSION
+        value: "5"
+      - key: SARVAM_DEFAULT_APP_VERSION
+        value: "5"
+      - key: SARVAM_AGENT_PHONE_NUMBER
+        value: "+918071582685"
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX
+        value: medical-ai
+      - key: PINECONE_DIMENSION
+        value: "768"

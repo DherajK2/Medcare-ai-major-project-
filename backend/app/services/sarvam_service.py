@@ -135,7 +135,14 @@ class SarvamService:
     @classmethod
     def store_webhook_insights(cls, data: Dict[str, Any]) -> Dict[str, Any]:
         """Save real-time HTTP tool payload pushed directly by Sarvam Voice Agent."""
-        call_id = str(data.get("call_id") or data.get("outbound_id") or data.get("id") or "").strip()
+        # Unpack nested variables if Sarvam sends them wrapped
+        nested_vars = data.get("final_agent_variables") or data.get("output_variables") or data.get("extracted_variables") or data.get("variables") or {}
+        if isinstance(nested_vars, dict):
+            for k, v in nested_vars.items():
+                if k not in data or not data[k]:
+                    data[k] = v
+
+        call_id = str(data.get("call_id") or data.get("outbound_id") or data.get("attempt_id") or data.get("interaction_id") or data.get("id") or "").strip()
         call_type = str(data.get("call_type") or ("emergency" if (data.get("emergency_type") or data.get("symptoms") or data.get("triage_status")) else "blood_bank")).lower()
         patient = str(data.get("patient_name") or "").strip()
         bank = str(data.get("blood_bank_name") or "").strip()
@@ -432,7 +439,7 @@ class SarvamService:
                 s = s.rstrip("/").split("/")[-1]
             return s.strip()
 
-        api_key = (self.api_key or settings.SARVAM_API_KEY or "").strip()
+        api_key = getattr(settings, "SARVAM_SAMVAAD_API_KEY", None) or self.api_key or settings.SARVAM_API_KEY
         org_id = _clean_id(settings.SARVAM_ORG_ID or "01a05e64-a78a-74b4-ace2-6a4749e4876b")
         workspace_id = _clean_id(settings.SARVAM_WORKSPACE_ID or "01a05e64-a79d-78b0-8718-01f0caed2249")
         connection_id = _clean_id(settings.SARVAM_CONNECTION_ID or "44dbf942-36-b6a718e2-845a")
@@ -471,11 +478,11 @@ class SarvamService:
         if app_version is not None:
             resolved_version = int(app_version)
         elif app_id == getattr(settings, "SARVAM_BLOOD_BANK_APP_ID", "Emergency-B-7af1e36f-7382"):
-            resolved_version = int(getattr(settings, "SARVAM_BLOOD_BANK_APP_VERSION", 4) or 4)
+            resolved_version = int(getattr(settings, "SARVAM_BLOOD_BANK_APP_VERSION", 5) or 5)
         elif app_id == getattr(settings, "SARVAM_EMERGENCY_APP_ID", "MedCare-Eme-abd37307-3a0f"):
-            resolved_version = int(getattr(settings, "SARVAM_EMERGENCY_APP_VERSION", 3) or 3)
+            resolved_version = int(getattr(settings, "SARVAM_EMERGENCY_APP_VERSION", 5) or 5)
         else:
-            resolved_version = int(getattr(settings, "SARVAM_DEFAULT_APP_VERSION", 3) or 3)
+            resolved_version = int(getattr(settings, "SARVAM_DEFAULT_APP_VERSION", 5) or 5)
 
         # Strictly whitelist variables per Sarvam App ID to prevent 422 Invalid Parameter errors
         APP_VARIABLE_WHITELISTS = {
@@ -600,9 +607,31 @@ class SarvamService:
                                         data = res.json()
                                         if isinstance(data, dict):
                                             logger.info(f"Sarvam outbound call successfully initiated via {endpoint_url}: {data}")
+                                            eff_call_id = str(data.get("attempt_id") or data.get("id") or data.get("outbound_id") or data.get("interaction_id") or f"call_{int(datetime.now().timestamp())}").strip()
+                                            
+                                            # Immediately record initial call in SQLite and in-memory cache for live summary
+                                            try:
+                                                SarvamService.store_webhook_insights({
+                                                    "call_id": eff_call_id,
+                                                    "call_type": "emergency" if (app_id == getattr(settings, "SARVAM_EMERGENCY_APP_ID", None) or "emergency" in str(context_data).lower()) else "blood_bank",
+                                                    "patient_name": clean_vars.get("patient_name") or "Emergency Patient",
+                                                    "blood_bank_name": clean_vars.get("blood_bank_name"),
+                                                    "blood_group": clean_vars.get("blood_group"),
+                                                    "units_needed": clean_vars.get("units_needed"),
+                                                    "hospital_name": clean_vars.get("hospital_name"),
+                                                    "emergency_type": clean_vars.get("emergency_type"),
+                                                    "location": clean_vars.get("location"),
+                                                    "symptoms": clean_vars.get("symptoms"),
+                                                    "stock_status": "Call Dispatched & In Progress",
+                                                    "triage_status": "Emergency Call Dispatched & Ringing",
+                                                    "call_summary": f"MedCare AI Voice Dispatch contacted {clean_vars.get('blood_bank_name') or clean_target} for patient {clean_vars.get('patient_name', 'Patient')}.",
+                                                })
+                                            except Exception as init_err:
+                                                logger.warning(f"Could not pre-record call {eff_call_id}: {init_err}")
+
                                             return {
                                                 "success": True,
-                                                "call_id": data.get("id") or data.get("outbound_id") or data.get("interaction_id") or "initiated",
+                                                "call_id": eff_call_id,
                                                 "status": "initiated",
                                                 "target_phone": clean_target,
                                                 "agent_id": app_id,
@@ -718,6 +747,7 @@ class SarvamService:
         into structured insights, stock status, reservation tokens, and attendant action items.
         """
         import json
+        samvaad_key = getattr(settings, "SARVAM_SAMVAAD_API_KEY", None) or self.api_key or settings.SARVAM_API_KEY
         api_key = self.api_key or settings.SARVAM_API_KEY
         org_id = settings.SARVAM_ORG_ID
         workspace_id = settings.SARVAM_WORKSPACE_ID
@@ -731,10 +761,9 @@ class SarvamService:
         llm_token = None
         llm_actions = None
 
-        if api_key and org_id and workspace_id:
+        if samvaad_key and org_id and workspace_id:
             headers = {
-                "X-API-Key": api_key.strip(),
-                "api-subscription-key": api_key.strip(),
+                "X-API-Key": samvaad_key.strip(),
                 "Content-Type": "application/json"
             }
             direct_endpoints = []
@@ -1191,6 +1220,7 @@ Return a valid JSON object with the following exact keys:
         into triage status, responder acknowledgment, ETA, and immediate caregiver checklist.
         """
         import json
+        samvaad_key = getattr(settings, "SARVAM_SAMVAAD_API_KEY", None) or self.api_key or settings.SARVAM_API_KEY
         api_key = self.api_key or settings.SARVAM_API_KEY
         org_id = settings.SARVAM_ORG_ID
         workspace_id = settings.SARVAM_WORKSPACE_ID
@@ -1204,10 +1234,9 @@ Return a valid JSON object with the following exact keys:
         llm_responder = None
         llm_actions = None
 
-        if api_key and org_id and workspace_id:
+        if samvaad_key and org_id and workspace_id:
             headers = {
-                "X-API-Key": api_key.strip(),
-                "api-subscription-key": api_key.strip(),
+                "X-API-Key": samvaad_key.strip(),
                 "Content-Type": "application/json"
             }
             direct_endpoints = []
@@ -1362,6 +1391,19 @@ Return a valid JSON object with the following exact keys:
                         detected_language = parsed.get("detected_language")
                 except Exception as e:
                     logger.warning(f"Failed to parse emergency LLM analytics output: {e}")
+
+        responder_name = (
+            extracted_vars.get("responder_name")
+            or extracted_vars.get("contact_name")
+            or extracted_vars.get("family_member")
+            or extracted_vars.get("responder")
+            or (structured_analytics.get("responder_name") if structured_analytics else None)
+            or llm_responder
+        )
+        if responder_name and str(responder_name).strip().lower() in ["null", "none", "unknown", "n/a", "undefined", ""]:
+            responder_name = None
+        elif responder_name:
+            responder_name = str(responder_name).strip()
 
         if not dialogue_turns:
             dialogue_turns = [

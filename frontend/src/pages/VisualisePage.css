@@ -21,8 +21,8 @@
 /* Modern studio surfaces and shadcn control treatments. */
 :root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--primary-foreground:#ffffff;--radius:.75rem;-webkit-font-smoothing:antialiased}
 .glass{border-radius:16px;box-shadow:0 2px 5px #24334403,0 16px 48px #24334407;backdrop-filter:blur(24px)}
-h1{display:flex;align-items:center;gap:12px;font-size:32px;font-weight:600;letter-spacing:-1.3px;margin:10px 0 8px}
-h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.03em;margin:0;opacity:1;color:#697782;border-color:var(--border);padding:2px 6px;border-radius:6px}
+.identity h1{display:flex;align-items:center;gap:12px;font-size:32px;font-weight:600;letter-spacing:-1.3px;margin:10px 0 8px}
+.identity h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.03em;margin:0;opacity:1;color:#697782;border-color:var(--border);padding:2px 6px;border-radius:6px}
 .eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em}
 .identity-meta{font-size:11px;letter-spacing:0}
 .anatomy-choice{margin-top:14px}.anatomy-choice [data-slot=select-trigger]{border-radius:9px;min-height:38px;color:var(--foreground);background:#ffffffd9;box-shadow:0 1px 2px #18253604}

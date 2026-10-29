@@ -74,15 +74,25 @@ export default function VisualisePage() {
 
   useEffect(() => {
     try {
+      if (!user) {
+        setPatientBiomarkers([]);
+        return;
+      }
       const raw = window.localStorage.getItem('medcare_analyzed_biomarkers');
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed) && parsed.length > 0) {
           setPatientBiomarkers(parsed);
+        } else {
+          setPatientBiomarkers([]);
         }
+      } else {
+        setPatientBiomarkers([]);
       }
-    } catch {}
-  }, []);
+    } catch {
+      setPatientBiomarkers([]);
+    }
+  }, [user]);
 
   const hasPatientReport = Boolean(user && patientBiomarkers && patientBiomarkers.length > 0);
 

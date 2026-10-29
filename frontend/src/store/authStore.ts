@@ -160,9 +160,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         localStorage.removeItem('medcare_push_permission');
         localStorage.removeItem('medcare_last_alert_ts');
       }
+      // Purge all user and patient cached sessions
+      localStorage.removeItem('medcare_token');
+      localStorage.removeItem('medcare_analyzed_biomarkers');
+      localStorage.removeItem('medcare_active_patient_id');
       usePatientStore.getState().reset();
       await firebaseSignOut(auth);
     } catch {}
-    set({ user: null });
+    set({ user: null, loading: false });
   },
 }));

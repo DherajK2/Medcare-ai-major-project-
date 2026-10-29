@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
-from app.core.dependencies import get_current_active_user, get_db
+from app.core.dependencies import get_current_active_user, get_optional_user, get_db
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.services.sarvam_service import SarvamService
 from app.services.emergency_calling_service import EmergencyCallingService
@@ -123,16 +123,19 @@ async def call_emergency_contact(
 
     # 1. Broadcast to all family members if patient_id or list of numbers is given
     if req.patient_id or (req.phone_numbers and len(req.phone_numbers) > 1):
-        target_pid = req.patient_id or current_user.id
-        res = await calling_svc.initiate_family_broadcast_calls(
-            patient_id=target_pid,
-            symptoms=req.symptoms or "Critical Vital Fluctuation / Acute Medical Emergency",
-            emergency_type=req.emergency_type or "Acute Medical Distress",
-            location=req.location,
-            phone_numbers=req.phone_numbers,
-            include_doctor=req.include_doctor if req.include_doctor is not None else True
-        )
-        return res
+        target_pid = req.patient_id or getattr(current_user, "id", None) or uuid.UUID("00000000-0000-0000-0000-000000000001")
+        try:
+            res = await calling_svc.initiate_family_broadcast_calls(
+                patient_id=target_pid,
+                symptoms=req.symptoms or "Critical Vital Fluctuation / Acute Medical Emergency",
+                emergency_type=req.emergency_type or "Acute Medical Distress",
+                location=req.location,
+                phone_numbers=req.phone_numbers,
+                include_doctor=req.include_doctor if req.include_doctor is not None else True
+            )
+            return res
+        except Exception as bcast_err:
+            logger.warning(f"Family broadcast error ({bcast_err}). Falling back to single phone dispatch.")
 
     # 2. Single phone number dispatch
     phone = req.phone_number or (req.phone_numbers[0] if req.phone_numbers else "+918310341645")
@@ -148,7 +151,7 @@ async def call_emergency_contact(
         target_phone_number=phone,
         context_data=context,
         agent_id=settings.SARVAM_EMERGENCY_APP_ID,
-        app_version=getattr(settings, "SARVAM_EMERGENCY_APP_VERSION", 3)
+        app_version=getattr(settings, "SARVAM_EMERGENCY_APP_VERSION", 5)
     )
 
     effective_call_id = result.get("call_id") if result.get("success") else f"call_{int(datetime.now().timestamp())}"
@@ -235,7 +238,7 @@ async def get_blood_bank_call_insights(
     units_needed: str = "2 Units",
     hospital_name: str = "Mysuru Hospital",
     language_preference: str = "en",
-    current_user=Depends(get_current_active_user)
+    current_user=Depends(get_optional_user)
 ):
     """
     Retrieve real-time conversation insights, dialogue turns, stock reservation status,
@@ -266,7 +269,7 @@ async def get_emergency_call_insights(
     contact_name: str = "Family Emergency Contact",
     phone_number: str = "",
     language_preference: str = "en",
-    current_user=Depends(get_current_active_user)
+    current_user=Depends(get_optional_user)
 ):
     """
     Retrieve real-time conversation insights, dialogue turns, triage status,

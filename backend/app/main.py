@@ -14,6 +14,14 @@ from app.services.scheduler_service import medication_scheduler
 async def lifespan(app: FastAPI):
     logger.info(f"Starting {settings.APP_NAME} v{settings.APP_VERSION}")
     try:
+        from app.core.dependencies import engine
+        from app.models import Base
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        logger.info("Database schema validated and initialized")
+    except Exception as e:
+        logger.warning(f"Database schema auto-creation skipped or failed: {e}")
+    try:
         scheduler.start()
     except Exception as e:
         logger.error(f"Scheduler start failed: {e}")
@@ -40,11 +48,11 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
     allow_origin_regex=r"^https?://.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 @app.exception_handler(Exception)

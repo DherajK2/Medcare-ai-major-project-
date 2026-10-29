@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { createClient } from '@supabase/supabase-js'
 
-const API_BASE = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const rawApiBase = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const API_BASE = rawApiBase.replace(/\/+$/, '')
 
 export const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL || 'http://localhost',

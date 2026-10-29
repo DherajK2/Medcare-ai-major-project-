@@ -337,7 +337,7 @@ class EmergencyCallingService:
                     target_phone_number=clean_num,
                     context_data=sarvam_context,
                     agent_id=getattr(settings, "SARVAM_EMERGENCY_APP_ID", None) or settings.SARVAM_APP_ID,
-                    app_version=getattr(settings, "SARVAM_EMERGENCY_APP_VERSION", 3) or 3
+                    app_version=getattr(settings, "SARVAM_EMERGENCY_APP_VERSION", 5) or 5
                 )
                 if sarvam_res.get("success"):
                     logger.info(f"Sarvam AI emergency call placed: {sarvam_res} to {clean_num}")
@@ -414,11 +414,17 @@ class EmergencyCallingService:
         from app.models.user import EmergencyContact, Doctor, Profile
         from app.models.patient import FamilyRelationship, Patient
 
-        dossier = await self.build_emergency_case_dossier(
-            patient_id=patient_id,
-            presenting_symptom=symptoms
-        )
-        patient = await self.db.get(Patient, patient_id)
+        try:
+            dossier = await self.build_emergency_case_dossier(
+                patient_id=patient_id,
+                presenting_symptom=symptoms
+            )
+            patient = await self.db.get(Patient, patient_id)
+        except Exception as db_err:
+            logger.warning(f"Could not query patient from database ({db_err}). Using caller context.")
+            dossier = {"success": False}
+            patient = None
+
         p_name = dossier.get("patient_name") if (dossier and dossier.get("success")) else (
             f"{patient.first_name} {patient.last_name}" if patient else "Patient"
         )
@@ -426,63 +432,66 @@ class EmergencyCallingService:
 
         call_targets: list[Dict[str, str]] = []
 
-        # 1. Registered Emergency Contacts (Family, Caregivers, Kin)
-        ec_res = await self.db.execute(
-            select(EmergencyContact).where(
-                EmergencyContact.patient_id == patient_id,
-                EmergencyContact.is_active == True
+        try:
+            # 1. Registered Emergency Contacts (Family, Caregivers, Kin)
+            ec_res = await self.db.execute(
+                select(EmergencyContact).where(
+                    EmergencyContact.patient_id == patient_id,
+                    EmergencyContact.is_active == True
+                )
             )
-        )
-        for ec in ec_res.scalars().all():
-            if ec.phone:
-                call_targets.append({
-                    "name": ec.name or "Emergency Contact",
-                    "relationship": ec.relationship_label or "Emergency Contact",
-                    "phone": str(ec.phone).strip()
-                })
-
-        # 2. Registered Family Relationships (Consenting Caregivers / Kin)
-        fam_res = await self.db.execute(
-            select(FamilyRelationship).where(FamilyRelationship.patient_id == patient_id)
-        )
-        for fam in fam_res.scalars().all():
-            if fam.user_id:
-                prof = await self.db.get(Profile, fam.user_id)
-                if prof and prof.phone:
+            for ec in ec_res.scalars().all():
+                if ec.phone:
                     call_targets.append({
-                        "name": prof.full_name or fam.relationship_label or "Family Member",
-                        "relationship": fam.relationship_label or "Family Member",
-                        "phone": str(prof.phone).strip()
+                        "name": ec.name or "Emergency Contact",
+                        "relationship": ec.relationship_label or "Emergency Contact",
+                        "phone": str(ec.phone).strip()
                     })
 
-        # 3. Patient contact phone if available
-        if patient and patient.phone:
-            call_targets.append({
-                "name": p_name,
-                "relationship": "Primary Patient Phone",
-                "phone": str(patient.phone).strip()
-            })
+            # 2. Registered Family Relationships (Consenting Caregivers / Kin)
+            fam_res = await self.db.execute(
+                select(FamilyRelationship).where(FamilyRelationship.patient_id == patient_id)
+            )
+            for fam in fam_res.scalars().all():
+                if fam.user_id:
+                    prof = await self.db.get(Profile, fam.user_id)
+                    if prof and prof.phone:
+                        call_targets.append({
+                            "name": prof.full_name or fam.relationship_label or "Family Member",
+                            "relationship": fam.relationship_label or "Family Member",
+                            "phone": str(prof.phone).strip()
+                        })
 
-        # 4. Primary account holder / Patient creator phone
-        if patient and patient.created_by:
-            creator_prof = await self.db.get(Profile, patient.created_by)
-            if creator_prof and creator_prof.phone:
+            # 3. Patient contact phone if available
+            if patient and patient.phone:
                 call_targets.append({
-                    "name": creator_prof.full_name or "Account Owner",
-                    "relationship": "Primary Care Account",
-                    "phone": str(creator_prof.phone).strip()
+                    "name": p_name,
+                    "relationship": "Primary Patient Phone",
+                    "phone": str(patient.phone).strip()
                 })
 
-        # 5. Attending Doctor (ONLY if explicitly registered in Family or explicit consent granted)
-        if include_doctor:
-            doc_res = await self.db.execute(select(Doctor).where(Doctor.patient_id == patient_id))
-            for doc in doc_res.scalars().all():
-                if doc.phone and doc.phone != "None":
+            # 4. Primary account holder / Patient creator phone
+            if patient and patient.created_by:
+                creator_prof = await self.db.get(Profile, patient.created_by)
+                if creator_prof and creator_prof.phone:
                     call_targets.append({
-                        "name": f"Dr. {doc.name}",
-                        "relationship": f"Attending {doc.specialty or 'Physician'} (Consented)",
-                        "phone": str(doc.phone).strip()
+                        "name": creator_prof.full_name or "Account Owner",
+                        "relationship": "Primary Care Account",
+                        "phone": str(creator_prof.phone).strip()
                     })
+
+            # 5. Attending Doctor (ONLY if explicitly registered in Family or explicit consent granted)
+            if include_doctor:
+                doc_res = await self.db.execute(select(Doctor).where(Doctor.patient_id == patient_id))
+                for doc in doc_res.scalars().all():
+                    if doc.phone and doc.phone != "None":
+                        call_targets.append({
+                            "name": f"Dr. {doc.name}",
+                            "relationship": f"Attending {doc.specialty or 'Physician'} (Consented)",
+                            "phone": str(doc.phone).strip()
+                        })
+        except Exception as contacts_err:
+            logger.warning(f"Could not load database emergency contacts ({contacts_err}). Using provided numbers.")
 
         # 6. Explicitly provided multiple numbers
         if phone_numbers:

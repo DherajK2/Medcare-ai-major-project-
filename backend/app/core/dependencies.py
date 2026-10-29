@@ -122,7 +122,12 @@ async def get_current_user(
             logger.info(f"Created new isolated user in PostgreSQL: {new_user.id} ({new_user.email})")
             return new_user
         except Exception as e:
-            logger.error(f"Error resolving user: {e}")
+            logger.error(f"Error resolving user from database: {e}")
+            # Resilient fallback: return an in-memory user instance so database downtime / paused project does not block authenticated actions
+            return User(
+                id=uid,
+                email=email or f"user_{uid}@example.com"
+            )
 
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -132,3 +137,23 @@ async def get_current_user(
 
 async def get_current_active_user(current_user=Depends(get_current_user)):
     return current_user
+
+async def get_optional_user(
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
+) -> Optional[User]:
+    token = credentials.credentials if credentials else None
+    if not token:
+        return None
+    try:
+        from app.core.security import verify_firebase_token, uid_to_pg_uuid
+        fb_payload = verify_firebase_token(token)
+        if fb_payload:
+            uid = uid_to_pg_uuid(str(fb_payload.get("user_id") or fb_payload.get("sub") or fb_payload.get("uid")))
+            return User(id=uid, email=fb_payload.get("email") or f"user_{uid}@example.com")
+        payload = verify_token(token)
+        if payload:
+            uid = uid_to_pg_uuid(str(payload.get("sub")))
+            return User(id=uid, email=payload.get("email") or f"user_{uid}@example.com")
+    except Exception:
+        pass
+    return None
