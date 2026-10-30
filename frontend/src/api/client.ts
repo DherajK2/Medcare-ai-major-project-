@@ -23,15 +23,8 @@ apiClient.interceptors.request.use(async (config) => {
   if (!token && auth.currentUser) {
     try {
       token = await auth.currentUser.getIdToken();
-    } catch {}
-  }
-
-  // 2. Check Supabase session fallback
-  if (!token) {
-    try {
-      const { data: { session } } = await supabase.auth.getSession()
-      if (session?.access_token) {
-        token = session.access_token;
+      if (token && typeof window !== 'undefined') {
+        localStorage.setItem('medcare_token', token);
       }
     } catch {}
   }

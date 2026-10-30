@@ -40,6 +40,18 @@ export default function App() {
   const { initialize } = useAuthStore()
   useEffect(() => { initialize() }, [initialize])
 
+  // Warm up and keep Render backend active (prevents 50s cold start delay)
+  useEffect(() => {
+    const rawUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || ''
+    const apiBase = rawUrl.replace(/\/+$/, '')
+    if (apiBase) {
+      const ping = () => { fetch(`${apiBase}/health`).catch(() => {}) }
+      ping()
+      const timer = setInterval(ping, 9 * 60 * 1000) // Keep-alive ping every 9 min
+      return () => clearInterval(timer)
+    }
+  }, [])
+
   return (
     <Routes>
       {/* ── Public routes ── */}

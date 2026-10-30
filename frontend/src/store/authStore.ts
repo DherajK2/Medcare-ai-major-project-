@@ -76,12 +76,20 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       onAuthStateChanged(auth, async (fbUser) => {
         const appUser = mapFirebaseUser(fbUser);
         const prevUser = get().user;
+        if (fbUser) {
+          try {
+            const token = await fbUser.getIdToken();
+            if (token && typeof window !== 'undefined') {
+              localStorage.setItem('medcare_token', token);
+            }
+          } catch {}
+        }
         set({ user: appUser, loading: false });
 
         if (appUser?.id !== prevUser?.id) {
           usePatientStore.getState().reset();
           if (appUser) {
-            await usePatientStore.getState().fetchPatients();
+            usePatientStore.getState().fetchPatients().catch(() => {});
           }
         }
       });
@@ -93,8 +101,15 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     usePatientStore.getState().reset();
     const cred = await signInWithEmailAndPassword(auth, email.trim(), password);
     const mapped = mapFirebaseUser(cred.user);
+    try {
+      const token = await cred.user.getIdToken();
+      if (token && typeof window !== 'undefined') {
+        localStorage.setItem('medcare_token', token);
+      }
+    } catch {}
     set({ user: mapped });
-    await usePatientStore.getState().fetchPatients();
+    // Fetch patients asynchronously so navigation to /app is instant
+    usePatientStore.getState().fetchPatients().catch(() => {});
   },
   signUp: async (email, password, fullName) => {
     usePatientStore.getState().reset();
@@ -108,16 +123,28 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     if (mapped?.user_metadata) {
       mapped.user_metadata.full_name = fullName;
     }
+    try {
+      const token = await cred.user.getIdToken();
+      if (token && typeof window !== 'undefined') {
+        localStorage.setItem('medcare_token', token);
+      }
+    } catch {}
     set({ user: mapped });
-    await usePatientStore.getState().fetchPatients();
+    usePatientStore.getState().fetchPatients().catch(() => {});
   },
   signInWithGoogle: async () => {
     usePatientStore.getState().reset();
     try {
       const cred = await signInWithPopup(auth, googleProvider);
       const mapped = mapFirebaseUser(cred.user);
+      try {
+        const token = await cred.user.getIdToken();
+        if (token && typeof window !== 'undefined') {
+          localStorage.setItem('medcare_token', token);
+        }
+      } catch {}
       set({ user: mapped });
-      await usePatientStore.getState().fetchPatients();
+      usePatientStore.getState().fetchPatients().catch(() => {});
     } catch (err: any) {
       if (err.code === 'auth/popup-blocked' || err.code === 'auth/cancelled-popup-request') {
         await signInWithRedirect(auth, googleProvider);

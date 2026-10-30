@@ -464,6 +464,20 @@ class SarvamService:
         endpoint = f"https://apps.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds"
 
         clean_key = (api_key or "").strip()
+        if not clean_key:
+            err_msg = (
+                "SARVAM_SAMVAAD_API_KEY is missing from environment. "
+                "Please configure SARVAM_SAMVAAD_API_KEY in Render Dashboard -> Environment Variables."
+            )
+            logger.error(err_msg)
+            return {
+                "success": False,
+                "status": "failed",
+                "status_code": 401,
+                "error": err_msg,
+                "target_phone": clean_target
+            }
+
         candidate_headers = [
             {"X-API-Key": clean_key, "Content-Type": "application/json"}
         ]
@@ -501,7 +515,6 @@ class SarvamService:
             allowed_keys = APP_VARIABLE_WHITELISTS[app_id]
             clean_vars = {str(k): str(v) for k, v in user_vars.items() if str(k) in allowed_keys}
         else:
-            # Drop known internal non-agent keys
             disallowed = {
                 "inquiry_objective", "greeting_intro", "caller_role", "language_instruction",
                 "emergency_script", "patient_age", "gender", "allergies", "vitals",
@@ -514,7 +527,6 @@ class SarvamService:
             clean_vars.setdefault("blood_bank_name", "Blood Bank")
             clean_vars.setdefault("patient_name", "Emergency Patient")
             clean_vars.setdefault("blood_group", "O+")
-            # Pass clean integer string for units_needed (e.g., "2")
             raw_units = clean_vars.get("units_needed", "2")
             if "unit" in str(raw_units).lower():
                 extracted_digits = re.findall(r'\d+', str(raw_units))
@@ -528,7 +540,7 @@ class SarvamService:
             clean_vars.setdefault("location", "Mysuru, Karnataka")
             clean_vars.setdefault("symptoms", "Severe distress")
 
-        # Generate candidate payloads matching official Sarvam Samvaad Outbound Call API specification
+        # Official Sarvam Samvaad Outbound Call API payloads
         payload_variations = [
             # Schema 1: Official Sarvam nested app_config + connection_config + user_config
             {
@@ -560,93 +572,69 @@ class SarvamService:
                     "agent_variables": clean_vars
                 },
                 "user_config": {
-                    "user_phone_number": clean_target
+                    "user_phone_number": clean_target,
+                    "user_variables": clean_vars
                 }
-            },
-            # Schema 3: Without app_version (defaults to active published agent version)
-            {
-                "app_config": {
-                    "app_id": app_id,
-                    "connection_config": {
-                        "connection_id": connection_id
-                    }
-                },
-                "user_config": {
-                    "user_phone_number": clean_target
-                }
-            },
-            # Schema 4: Flat direct schema
-            {
-                "app_id": app_id,
-                "user_phone_number": clean_target,
-                "connection_id": connection_id,
-                "agent_variables": clean_vars
             }
         ]
 
-        endpoints_to_try = [
-            f"https://apps.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
-            f"https://apps.sarvam.ai/api/app-runtime/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
-            f"https://agents.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds",
-            f"https://api.sarvam.ai/v1/voice-agents/outbound"
-        ]
+        endpoint_url = f"https://apps.sarvam.ai/api/outbounds/v1/orgs/{org_id}/workspaces/{workspace_id}/outbounds"
 
-        logger.info(f"Triggering Sarvam outbound voice call to {clean_target} using agent {app_id} in org {org_id} workspace {workspace_id}")
+        logger.info(f"Triggering Sarvam outbound voice call to {clean_target} using agent {app_id} (version {resolved_version})")
 
         try:
-            async with httpx.AsyncClient(timeout=30.0) as client:
+            async with httpx.AsyncClient(timeout=12.0) as client:
                 last_res = None
-                for endpoint_url in endpoints_to_try:
-                    for payload_item in payload_variations:
-                        for headers in candidate_headers:
-                            try:
-                                res = await client.post(endpoint_url, headers=headers, json=payload_item)
-                                last_res = res
-                                if res.status_code in [200, 201, 202]:
-                                    try:
-                                        data = res.json()
-                                        if isinstance(data, dict):
-                                            logger.info(f"Sarvam outbound call successfully initiated via {endpoint_url}: {data}")
-                                            eff_call_id = str(data.get("attempt_id") or data.get("id") or data.get("outbound_id") or data.get("interaction_id") or f"call_{int(datetime.now().timestamp())}").strip()
-                                            
-                                            # Immediately record initial call in SQLite and in-memory cache for live summary
-                                            try:
-                                                SarvamService.store_webhook_insights({
-                                                    "call_id": eff_call_id,
-                                                    "call_type": "emergency" if (app_id == getattr(settings, "SARVAM_EMERGENCY_APP_ID", None) or "emergency" in str(context_data).lower()) else "blood_bank",
-                                                    "patient_name": clean_vars.get("patient_name") or "Emergency Patient",
-                                                    "blood_bank_name": clean_vars.get("blood_bank_name"),
-                                                    "blood_group": clean_vars.get("blood_group"),
-                                                    "units_needed": clean_vars.get("units_needed"),
-                                                    "hospital_name": clean_vars.get("hospital_name"),
-                                                    "emergency_type": clean_vars.get("emergency_type"),
-                                                    "location": clean_vars.get("location"),
-                                                    "symptoms": clean_vars.get("symptoms"),
-                                                    "stock_status": "Call Dispatched & In Progress",
-                                                    "triage_status": "Emergency Call Dispatched & Ringing",
-                                                    "call_summary": f"MedCare AI Voice Dispatch contacted {clean_vars.get('blood_bank_name') or clean_target} for patient {clean_vars.get('patient_name', 'Patient')}.",
-                                                })
-                                            except Exception as init_err:
-                                                logger.warning(f"Could not pre-record call {eff_call_id}: {init_err}")
-
-                                            return {
-                                                "success": True,
+                for payload_item in payload_variations:
+                    for headers in candidate_headers:
+                        try:
+                            res = await client.post(endpoint_url, headers=headers, json=payload_item)
+                            last_res = res
+                            if res.status_code in [200, 201, 202]:
+                                try:
+                                    data = res.json()
+                                    if isinstance(data, dict):
+                                        logger.info(f"Sarvam outbound call successfully initiated: {data}")
+                                        eff_call_id = str(data.get("attempt_id") or data.get("id") or data.get("outbound_id") or data.get("interaction_id") or f"call_{int(datetime.now().timestamp())}").strip()
+                                        
+                                        # Immediately record initial call in SQLite and in-memory cache for live summary
+                                        try:
+                                            SarvamService.store_webhook_insights({
                                                 "call_id": eff_call_id,
-                                                "status": "initiated",
-                                                "target_phone": clean_target,
-                                                "agent_id": app_id,
-                                                "details": data
-                                            }
-                                    except Exception:
-                                        continue
-                                elif res.status_code == 401:
-                                    continue  # Try next candidate header
-                                elif res.status_code in [404, 422]:
-                                    continue  # Try next payload variation or endpoint
-                                else:
-                                    break
-                            except Exception as req_err:
-                                logger.warning(f"Error requesting {endpoint_url}: {req_err}")
+                                                "call_type": "emergency" if (app_id == getattr(settings, "SARVAM_EMERGENCY_APP_ID", None) or "emergency" in str(context_data).lower()) else "blood_bank",
+                                                "patient_name": clean_vars.get("patient_name") or "Emergency Patient",
+                                                "blood_bank_name": clean_vars.get("blood_bank_name"),
+                                                "blood_group": clean_vars.get("blood_group"),
+                                                "units_needed": clean_vars.get("units_needed"),
+                                                "hospital_name": clean_vars.get("hospital_name"),
+                                                "emergency_type": clean_vars.get("emergency_type"),
+                                                "location": clean_vars.get("location"),
+                                                "symptoms": clean_vars.get("symptoms"),
+                                                "stock_status": "Call Dispatched & Ringing",
+                                                "triage_status": "Emergency Call Dispatched & Ringing",
+                                                "call_summary": f"MedCare AI Voice Dispatch contacted {clean_vars.get('blood_bank_name') or clean_target} for patient {clean_vars.get('patient_name', 'Patient')}.",
+                                            })
+                                        except Exception as init_err:
+                                            logger.warning(f"Could not pre-record call {eff_call_id}: {init_err}")
+
+                                        return {
+                                            "success": True,
+                                            "call_id": eff_call_id,
+                                            "status": "initiated",
+                                            "target_phone": clean_target,
+                                            "agent_id": app_id,
+                                            "details": data
+                                        }
+                                except Exception:
+                                    continue
+                            elif res.status_code == 401:
+                                continue  # Try next candidate header
+                            elif res.status_code == 422:
+                                continue  # Try next payload variation
+                            else:
+                                break
+                        except Exception as req_err:
+                            logger.warning(f"Error requesting Sarvam outbound endpoint: {req_err}")
 
                 err_text = last_res.text if (last_res and not last_res.text.strip().startswith("<")) else f"Sarvam Gateway returned HTTP {last_res.status_code if last_res else 500}"
                 logger.error(f"Sarvam outbound call returned HTTP {last_res.status_code if last_res else 500}: {err_text}")

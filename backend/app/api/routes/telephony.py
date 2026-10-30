@@ -85,19 +85,12 @@ async def call_blood_bank(
     }
 
     if not result.get("success"):
-        logger.warning(f"Outbound call initiation gateway response ({result.get('error')}). Activating interactive local demonstration mode.")
-        effective_call_id = inquiry_record["call_id"]
+        error_msg = result.get("error") or "Outbound call gateway failed"
+        logger.error(f"Outbound call initiation failed: {error_msg}")
         return {
-            "status": "success",
-            "message": f"Sarvam AI Voice Agent call initiated to {req.blood_bank_name} ({req.phone_number})",
-            "result": {
-                "success": True,
-                "call_id": effective_call_id,
-                "status": "initiated",
-                "target_phone": req.phone_number,
-                "mode": "demonstration_fallback",
-                "gateway_note": result.get("error")
-            },
+            "status": "error",
+            "message": error_msg,
+            "result": result,
             "inquiry_record": inquiry_record
         }
 
@@ -169,6 +162,16 @@ async def call_emergency_contact(
         "call_id": effective_call_id,
         "ai_notes": f"Emergency voice dispatch call initiated to {phone} regarding {req.patient_name}'s {req.symptoms or 'acute condition'} at {req.location or 'Mysuru'}."
     }
+
+    if not result.get("success"):
+        error_msg = result.get("error") or "Failed to initiate outbound emergency call via Sarvam Voice Agent"
+        logger.error(f"Emergency voice call dispatch failed: {error_msg}")
+        return {
+            "status": "error",
+            "message": error_msg,
+            "result": result,
+            "inquiry_record": inquiry_record
+        }
 
     return {
         "status": "success",

@@ -323,7 +323,8 @@ class EmergencyCallingService:
                 logger.warning(f"Could not build full dossier context for voice call: {ex}")
 
         # 1. Try Sarvam AI Voice Agent (high fidelity multilingual conversational emergency dispatch)
-        if settings.SARVAM_API_KEY and (getattr(settings, "SARVAM_EMERGENCY_APP_ID", None) or settings.SARVAM_APP_ID):
+        sarvam_active_key = getattr(settings, "SARVAM_SAMVAAD_API_KEY", None) or settings.SARVAM_API_KEY
+        if sarvam_active_key and (getattr(settings, "SARVAM_EMERGENCY_APP_ID", None) or settings.SARVAM_APP_ID):
             try:
                 from app.services.sarvam_service import SarvamService
                 sarvam = SarvamService()

@@ -22,35 +22,55 @@ def verify_token(token: str) -> Optional[dict]:
     except JWTError:
         return None
 
+_FIREBASE_TOKEN_CACHE: dict = {}
+
 def verify_firebase_token(token: str) -> Optional[dict]:
     """
-    Verify Firebase Authentication ID token.
-    Supports official Google OAuth2 token verification with resilient fallback.
+    Verify Firebase Authentication ID token with in-memory TTL caching.
+    Avoids repeated synchronous HTTP network roundtrips to Google cert servers on every authenticated request.
     """
+    if not token or not isinstance(token, str):
+        return None
+
+    now = datetime.utcnow().timestamp()
+    cached = _FIREBASE_TOKEN_CACHE.get(token)
+    if cached and cached.get("exp_at", 0) > now:
+        return cached.get("payload")
+
+    decoded = None
     try:
         from google.oauth2 import id_token
         from google.auth.transport import requests as google_requests
         request_adapter = google_requests.Request()
         decoded = id_token.verify_firebase_token(token, request_adapter, audience="medcare-ai-241c5")
-        if decoded:
-            return decoded
     except Exception:
         pass
 
-    try:
-        # Fallback decode for Firebase tokens
-        parts = token.split(".")
-        if len(parts) == 3:
-            rem = len(parts[1]) % 4
-            padded = parts[1] + ("=" * (4 - rem) if rem else "")
-            payload_bytes = base64.urlsafe_b64decode(padded)
-            payload = json.loads(payload_bytes)
-            iss = payload.get("iss", "")
-            if "securetoken.google.com" in iss or payload.get("firebase") or payload.get("auth_time"):
-                return payload
-    except Exception:
-        pass
-    return None
+    if not decoded:
+        try:
+            # Resilient fallback decode for Firebase tokens
+            parts = token.split(".")
+            if len(parts) == 3:
+                rem = len(parts[1]) % 4
+                padded = parts[1] + ("=" * (4 - rem) if rem else "")
+                payload_bytes = base64.urlsafe_b64decode(padded)
+                payload = json.loads(payload_bytes)
+                iss = payload.get("iss", "")
+                if "securetoken.google.com" in iss or payload.get("firebase") or payload.get("auth_time"):
+                    decoded = payload
+        except Exception:
+            pass
+
+    if decoded:
+        token_exp = float(decoded.get("exp") or (now + 600))
+        cache_until = min(now + 600, token_exp)
+        if len(_FIREBASE_TOKEN_CACHE) > 500:
+            _FIREBASE_TOKEN_CACHE.clear()
+        _FIREBASE_TOKEN_CACHE[token] = {
+            "payload": decoded,
+            "exp_at": cache_until
+        }
+    return decoded
 
 def uid_to_pg_uuid(uid_str: str) -> uuid.UUID:
     """Convert any auth uid (Firebase string or standard UUID) to a deterministic RFC 4122 UUID."""
